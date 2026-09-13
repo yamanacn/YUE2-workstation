@@ -67,35 +67,53 @@ def remove_mismatched_ties(music, tools):
     return ''.join(character for index, character in enumerate(music) if index not in remove), len(remove)
 
 
+def provided_score_layout(lines):
+    """Locate the header block of a provided score and its declared voices.
+
+    Two shapes stay acceptable: the native Vocal+Ins pair, and a single voice
+    list. External editors drop the vocal part from a pure instrumental score,
+    or the instrumental part from a melody-only score, while keeping the native
+    field order.
+    """
+    if len(lines) < 8:
+        raise ValueError('Incomplete two-voice ABC')
+    if all(re.fullmatch(rf'V:\s*{voice}(?:\s+[^\n]+)?', lines[index].strip())
+           for index, voice in ((5, 'Vocal'), (6, 'Ins'))):
+        return 7, 8, ('Vocal', 'Ins')
+    single = re.fullmatch(r'V:\s*(Vocal|Ins)(?:\s+[^\n]+)?', lines[5].strip())
+    if single is not None and lines[6].startswith('K:'):
+        return 6, 7, (single.group(1),)
+    raise ValueError('Expected Vocal and Ins voice definitions in the native order, '
+                     'or exactly one of them')
+
+
 def normalize_instrumental_score(text):
-    """Canonicalize valid two-voice ABC variants before instrumental editing.
+    """Canonicalize valid ABC variants before instrumental editing.
 
     AI-edited and imported scores often preserve the required Vocal/Ins IDs but
-    omit the display names, or compress more than four empty measures as Z8,
-    Z12, and so on. YuE2 can consume those scores, while the conservative edit
-    parser intentionally accepts only native headers and 1-4-measure groups.
-    Normalize only those representational differences; notes, chords, keys,
-    meters, and bar order remain unchanged.
+    omit the display names, keep only one of the two voices, or compress more
+    than four empty measures as Z8, Z12, and so on. YuE2 can consume those
+    scores, while the conservative edit parser intentionally accepts only
+    native headers and 1-4-measure groups. Normalize only those representational
+    differences: a voice that is absent becomes full-measure rests following the
+    surviving voice's meter and key timeline. Notes, chords, keys, meters, and
+    bar order remain unchanged.
     """
     tools = abc_tools()
     try:
         tools.parse(text)
         return text, {'scoreNormalization': 'native', 'voiceHeadersNormalized': False,
                       'groupsRechunked': 0, 'expandedRestMeasures': 0,
-                      'invalidTiesRemoved': 0}
+                      'invalidTiesRemoved': 0, 'synthesizedVoices': []}
     except ValueError:
         pass
     lines = text.splitlines()
-    if len(lines) < 8:
-        raise ValueError('Incomplete two-voice ABC')
-    for index, voice in ((5, 'Vocal'), (6, 'Ins')):
-        if not re.fullmatch(rf'V:\s*{voice}(?:\s+[^\n]+)?', lines[index].strip()):
-            raise ValueError('Expected Vocal and Ins voice definitions in the native order')
-    output = [*lines[:5], *_NATIVE_VOICE_HEADERS, lines[7]]
-    cursor = 8
+    key_index, cursor, declared = provided_score_layout(lines)
+    output = [*lines[:5], *_NATIVE_VOICE_HEADERS, lines[key_index]]
     groups_rechunked = 0
     expanded_rest_measures = 0
     invalid_ties_removed = 0
+    synthesized = set()
     while cursor < len(lines):
         comments = []
         while cursor < len(lines) and lines[cursor].startswith('%'):
@@ -104,9 +122,13 @@ def normalize_instrumental_score(text):
         if cursor >= len(lines):
             raise ValueError('Dangling section comment without music')
         blocks = {}
-        for voice in tools.VOICES:
-            if lines[cursor].strip() != f'V: {voice}':
-                raise ValueError(f'Expected V: {voice} in paired score group')
+        while cursor < len(lines) and lines[cursor].strip().startswith('V:'):
+            header = re.fullmatch(r'V:\s*(Vocal|Ins)', lines[cursor].strip())
+            if header is None or header.group(1) not in declared:
+                raise ValueError('Unsupported voice block: ' + lines[cursor].strip())
+            voice = header.group(1)
+            if voice in blocks:
+                raise ValueError(f'Duplicate V: {voice} block in score group')
             cursor += 1
             fields = []
             while cursor < len(lines) and lines[cursor].startswith(('M:', 'K:')):
@@ -144,21 +166,28 @@ def normalize_instrumental_score(text):
                 else:
                     bars.append(bar)
             blocks[voice] = (fields, bars)
-        vocal_bars = blocks['Vocal'][1]
-        ins_bars = blocks['Ins'][1]
-        if len(vocal_bars) != len(ins_bars):
+        if not blocks:
+            raise ValueError('Expected a Vocal or Ins voice block in score group')
+        counts = {len(bars) for _, bars in blocks.values()}
+        if len(counts) != 1:
             raise ValueError('Vocal and Ins voices have different measure counts')
-        if len(vocal_bars) > 4:
+        measures = counts.pop()
+        if measures > 4:
             groups_rechunked += 1
-        for start in range(0, len(vocal_bars), 4):
+        mirror = next(iter(blocks.values()))[0]
+        synthesized.update(voice for voice in tools.VOICES if voice not in blocks)
+        for start in range(0, measures, 4):
             if start == 0:
                 output.extend(comments)
+            chunk = min(4, measures - start)
             for voice in tools.VOICES:
-                fields, bars = blocks[voice]
                 output.append(f'V: {voice}')
                 if start == 0:
-                    output.extend(fields)
-                output.append('|'.join(bars[start:start + 4]) + '|')
+                    output.extend(blocks[voice][0] if voice in blocks else mirror)
+                if voice in blocks:
+                    output.append('|'.join(blocks[voice][1][start:start + 4]) + '|')
+                else:
+                    output.append('|'.join(['Z'] * chunk) + '|')
     normalized = '\n'.join(output) + ('\n' if text.endswith(('\n', '\r')) else '')
     tools.parse(normalized)
     return normalized, {
@@ -167,6 +196,7 @@ def normalize_instrumental_score(text):
         'groupsRechunked': groups_rechunked,
         'expandedRestMeasures': expanded_rest_measures,
         'invalidTiesRemoved': invalid_ties_removed,
+        'synthesizedVoices': [voice for voice in tools.VOICES if voice in synthesized],
     }
 
 

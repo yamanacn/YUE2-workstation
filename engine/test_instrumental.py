@@ -1,4 +1,4 @@
-import tempfile,unittest
+import json,tempfile,unittest
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock
@@ -48,6 +48,53 @@ class InstrumentalTests(unittest.TestCase):
             self.assertEqual(len(abc_tools().parse(output).voices['Ins'].notes),8)
             audit=(Path(tmp)/'instrumental-transform.json').read_text(encoding='utf-8')
             self.assertIn('"scoreNormalization":"canonicalized"',audit)
+
+    def test_single_voice_provided_score_restores_missing_voice(self):
+        provided=('X:1\nT:\nM:4/4\nL:1/16\nQ:1/4=104\n'
+            'V: Ins clef=treble snm=Inst.\nK:Fm\n'
+            '% intro\nV: Ins\nf3a3b3f3f4|e2f2a2f3f3f4|\n'
+            '% verse 1\nV: Ins\nZ4|\n')
+        normalized,audit=normalize_instrumental_score(provided)
+        parsed=abc_tools().parse(normalized)
+        self.assertEqual(parsed.voices['Vocal'].notes,[])
+        self.assertIn('f3a3b3f3f4|e2f2a2f3f3f4|',normalized)
+        self.assertEqual(len(parsed.voices['Vocal'].bars),len(parsed.voices['Ins'].bars))
+        self.assertEqual(len(parsed.voices['Ins'].bars),6)
+        self.assertEqual(audit['synthesizedVoices'],['Vocal'])
+        self.assertEqual(audit['expandedRestMeasures'],3)
+        self.assertTrue(audit['voiceHeadersNormalized'])
+
+    def test_single_instrumental_voice_reaches_native_generation(self):
+        provided=('X:1\nT:\nM:4/4\nL:1/16\nQ:1/4=104\n'
+            'V: Ins clef=treble snm=Inst.\nK:Fm\n'
+            '% intro\nV: Ins\nf3a3b3f3f4|e2f2a2f3f3f4|\n'
+            '% verse 1\nV: Ins\nZ16|\n')
+        with tempfile.TemporaryDirectory() as tmp:
+            pipe=Mock();pipe.plan.return_value=SimpleNamespace(abc=provided,truncated=False,timing={})
+            generate(pipe,{'style':'Instrumental music','lyrics':'','abc':provided,'cot':'full'},'instrumental',Path(tmp),Mock(),Mock())
+            output=pipe.call_args.kwargs['abc']
+            parsed=abc_tools().parse(output)
+            self.assertEqual(parsed.voices['Vocal'].notes,[])
+            self.assertEqual(len(parsed.voices['Ins'].notes),11)
+            audit=json.loads((Path(tmp)/'instrumental-transform.json').read_text(encoding='utf-8'))
+            self.assertEqual(audit['synthesizedVoices'],['Vocal'])
+            self.assertEqual(audit['compensatedGroups'],0)
+            self.assertEqual(audit['transferredVocalNotes'],0)
+
+    def test_single_melody_voice_compensates_into_instrumental(self):
+        provided=('X:1\nT:\nM:4/4\nL:1/16\nQ:1/4=104\n'
+            'V: Vocal clef=treble snm=Vocal\nK:Fm\n'
+            '% verse\nV: Vocal\nF16|G16|A16|B16|\n')
+        with tempfile.TemporaryDirectory() as tmp:
+            pipe=Mock();pipe.plan.return_value=SimpleNamespace(abc=provided,truncated=False,timing={})
+            generate(pipe,{'style':'Instrumental music','lyrics':'','abc':provided,'cot':'full'},'instrumental',Path(tmp),Mock(),Mock())
+            output=pipe.call_args.kwargs['abc']
+            parsed=abc_tools().parse(output)
+            self.assertEqual(parsed.voices['Vocal'].notes,[])
+            self.assertEqual(len(parsed.voices['Ins'].notes),4)
+            audit=json.loads((Path(tmp)/'instrumental-transform.json').read_text(encoding='utf-8'))
+            self.assertEqual(audit['synthesizedVoices'],['Ins'])
+            self.assertEqual(audit['transferredVocalNotes'],4)
 
     def test_ties_chords_and_instrumental_preserved(self):
         before=score(); after,audit=mute_vocal(before)
