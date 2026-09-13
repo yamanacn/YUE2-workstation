@@ -25,8 +25,9 @@ Thumbs.db
 .ruff_cache/
 docs/
 benchmarks/
-scripts/
+/scripts/
 vendor/yue2/src/yue2_infer.egg-info/
 runtime/models-manifest.json
 runtime/package_local.py
 studio/npm-audit.json
+
