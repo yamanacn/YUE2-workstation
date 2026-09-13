@@ -15,6 +15,18 @@
 - 本地任务队列、取消、重试、恢复、播放和 FLAC/WAV 导出
 - AI 风格、歌词和 ABC 助手，支持 Qwen3.8-Flash 与 DeepSeek-Flash
 
+## 页面预览
+
+以下截图展示工作站的主要使用路径，截图中的作品和内容均为演示数据。
+
+| 创作工作台 | 作品详情 |
+|---|---|
+| ![桌面创作工作台](assets/screenshots/desktop-workbench.png) | ![作品详情面板](assets/screenshots/work-details.png) |
+
+| ABC 乐谱工作区 | 移动端创作 |
+|---|---|
+| ![ABC 乐谱工作区](assets/screenshots/abc-score-workspace.png) | ![移动端创作界面](assets/screenshots/mobile-composer.png) |
+
 ## 环境要求
 
 - Windows 10/11 64 位

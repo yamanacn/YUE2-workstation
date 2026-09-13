@@ -6,6 +6,18 @@ A Windows-focused local workstation built on YuE2. It provides lyrics/style gene
 
 > This source repository is for developers. Model weights, virtual environments, the bundled Python runtime, browser binaries, user data, and API keys are intentionally excluded.
 
+## Screenshots
+
+These screenshots show the main workstation flows. The works and content shown are demo data.
+
+| Creation workbench | Work details |
+|---|---|
+| ![Desktop creation workbench](assets/screenshots/desktop-workbench.png) | ![Work details panel](assets/screenshots/work-details.png) |
+
+| ABC score workspace | Mobile creation |
+|---|---|
+| ![ABC score workspace](assets/screenshots/abc-score-workspace.png) | ![Mobile creation view](assets/screenshots/mobile-composer.png) |
+
 ## Requirements
 
 - Windows 10/11 x64
