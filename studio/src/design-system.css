@@ -1,0 +1,144 @@
+/* Dub-inspired product surfaces. Shared geometry, theme-specific contrast.
+   Editors remain borderless; focus never adds an outer ring. */
+:root[data-theme]{
+  --ui-canvas:#fff;--ui-panel:#fafafa;--ui-card:#f5f5f5;--ui-control:#ededed;
+  --ui-hover:#e8e8e8;--ui-edge:#e5e5e5;--ui-accent:#2563eb;--ui-tint:#eaf1ff;
+  --ink:#171717;--text:#171717;--secondary:#525252;--muted:#737373;
+  --line:var(--ui-edge);--taupe:var(--ui-tint);--taupe-ink:var(--ui-accent);
+  --ui-primary:#171717;--ui-on-primary:#fff;
+  font-family:Inter,"Segoe UI","Microsoft YaHei UI",sans-serif;
+}
+:root[data-theme=dark]{
+  --ui-canvas:#101012;--ui-panel:#141416;--ui-card:#1b1b1e;--ui-control:#252528;
+  --ui-hover:#2d2d32;--ui-edge:#2b2b30;--ui-accent:#9bbcff;--ui-tint:#253047;
+  --ink:#efeff1;--text:#efeff1;--secondary:#b6b6be;--muted:#96969f;
+  --ui-primary:#efeff1;--ui-on-primary:#171719;
+}
+html[data-theme] body,html[data-theme] .studio-app{background:var(--ui-canvas);color:var(--ink)}
+html[data-theme] .studio-app{grid-template-rows:64px minmax(0,1fr) 80px}
+html[data-theme] .glass{background:var(--ui-canvas);border:0;box-shadow:none;backdrop-filter:none}
+html[data-theme] .app-header{background:var(--ui-canvas);padding:0 24px;border-bottom:1px solid var(--line);gap:16px}
+html[data-theme] .brand{gap:10px}
+html[data-theme] .brand strong{font-size:24px;letter-spacing:-1px;font-weight:600}
+html[data-theme] .brand>span{font-size:12px;color:var(--muted)}
+html[data-theme] .brand svg{width:24px;height:24px;color:var(--ink)}
+html[data-theme] .brand-separator,html[data-theme] .environment-caption{display:none}
+html[data-theme] .header-button.button{background:transparent;border:1px solid var(--line);border-radius:8px;font-size:12px;box-shadow:none}
+html[data-theme] .engine-status{background:transparent;box-shadow:none;font-size:12px;color:var(--muted)}
+html[data-theme] .count-badge{background:var(--ui-control);color:var(--secondary);border-radius:9999px}
+html[data-theme] .workspace-navigation{background:var(--ui-panel);padding:20px 10px;gap:8px}
+html[data-theme] .workspace-navigation button{border-radius:12px;min-height:64px;font-weight:500}
+html[data-theme] .workspace-navigation button:hover{background:var(--ui-card);color:var(--ink)}
+html[data-theme] .workspace-navigation button[aria-current=page]{background:var(--ui-tint);color:var(--ui-accent)}
+html[data-theme] .workbench{padding:0;gap:0}
+html[data-theme] .composer{padding:20px 20px 12px;border:0;border-radius:0;background:var(--ui-panel)}
+html[data-theme] .composer::before,html[data-theme] .player::before{display:none}
+html[data-theme] .composer-topline{min-height:28px;margin-bottom:12px}
+html[data-theme] .composer-topline>span:first-child{font-size:14px;font-weight:600}
+html[data-theme] .save-status{font-size:11px;color:var(--muted)}
+html[data-theme] .title-field{margin-bottom:16px;min-height:44px}
+html[data-theme] .composer .title-field input{font-family:inherit;font-size:16px;font-weight:500;letter-spacing:0;line-height:1.5;height:44px;min-height:44px;padding:10px 14px;border:0;border-radius:8px;background:var(--ui-card);box-shadow:none}
+html[data-theme] .composer :is(.lyrics-field,.style-field,.vocal-mode-field,.arrangement-field),html[data-theme] .composer-preferences .creative-card{background:var(--ui-card);border:0;border-radius:12px;padding:16px;box-shadow:none}
+html[data-theme] .composer :is(.style-field,.vocal-mode-field,.arrangement-field,.composer-preferences){margin-top:16px}
+html[data-theme] .composer :is(.lyrics-field,.style-field):focus-within{box-shadow:none}
+html[data-theme] .composer .field-heading,html[data-theme] .creative-heading{display:flex;align-items:center;justify-content:flex-start;gap:8px;min-height:24px;margin-bottom:16px}
+html[data-theme] :is(.field-collapse,.creative-heading h3,.arrangement-field .field-heading label){font-size:14px;font-weight:600;line-height:1.5;color:var(--ink)}
+html[data-theme] .creative-heading>svg,html[data-theme] .arrangement-field .field-heading>svg{width:18px;height:18px;color:var(--secondary)}
+html[data-theme] .composer .textarea-shell,html[data-theme] .composer .textarea-shell:focus-within{border:0;background:transparent;box-shadow:none;border-radius:0}
+html[data-theme] .composer .textarea-shell textarea{font-size:14px;line-height:1.85;color:var(--secondary);padding:4px 0 28px}
+html[data-theme] .composer textarea::placeholder,html[data-theme] input::placeholder{color:var(--muted)}
+html[data-theme] .composer .vocal-mode-row{min-height:36px;gap:12px}
+html[data-theme] .composer .vocal-mode-label{font-size:14px;font-weight:600}
+html[data-theme] .composer .vocal-mode-field .option-group>button{padding:8px 10px;border-radius:8px;white-space:nowrap;font-size:12px;min-height:34px}
+html[data-theme] .composer .vocal-mode-field .option-group>button[aria-pressed=true]{background:var(--ui-tint);color:var(--ui-accent);box-shadow:none}
+html[data-theme] .arrangement-options{gap:6px}
+html[data-theme] .arrangement-options button{padding:12px 8px;border-radius:8px}
+html[data-theme] .arrangement-options button[aria-pressed=true]{background:var(--ui-tint);color:var(--ui-accent)}
+html[data-theme] .arrangement-options button strong{font-size:12px;font-weight:600}
+html[data-theme] .arrangement-options button small{font-size:11px;opacity:1;color:var(--muted)}
+html[data-theme] :is(.arrangement-help,.creative-settings .setting-help){font-size:12px;line-height:1.75;color:var(--muted);margin-top:12px}
+html[data-theme] .creative-settings{--card-bg:var(--ui-card);--card-edge:var(--ui-edge);--control-bg:var(--ui-control);--selected-bg:var(--ui-tint);--selected-text:var(--ui-accent)}
+html[data-theme] .creative-card{border-radius:12px;padding:16px;box-shadow:none}
+html[data-theme] .creative-label{font-size:13px}
+html[data-theme] .creative-label output span{border-radius:6px;padding:5px 8px}
+html[data-theme] .composer-footer{background:var(--ui-panel);padding-top:16px}
+html[data-theme] .generate-button.button{height:48px;border-radius:8px;background:var(--ui-primary);color:var(--ui-on-primary);border:0;box-shadow:0 1px 2px #0000000d;font-size:15px;font-weight:600}
+html[data-theme] .generate-button.button:hover:not(:disabled){background:var(--ui-primary);filter:brightness(.94);box-shadow:none;transform:none}
+html[data-theme] .generate-button.button>svg{width:20px;height:20px}
+html[data-theme] .generate-button.button:disabled{background:var(--ui-control);color:var(--muted)}
+html[data-theme] .generate-caption{font-size:10px;color:var(--muted)}
+html[data-theme] .modification-count{background:var(--ui-tint);color:var(--ui-accent);border-radius:9999px}
+html[data-theme] .library{background:var(--ui-canvas);padding:0;border-radius:0}
+html[data-theme] .library-header{padding:20px 24px 12px;display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line)}
+html[data-theme] .library-title-row{display:contents}
+html[data-theme] .library-title-row h1{display:none}
+html[data-theme] .search-field{flex:1;width:auto;max-width:none;min-width:100px;height:40px;border:0;background:var(--ui-card);border-radius:8px;padding:0 12px;box-shadow:none}
+html[data-theme] .search-field input{font-size:13px;color:var(--ink)}
+html[data-theme] .search-field>svg{width:18px;height:18px;color:var(--muted)}
+html[data-theme] .library-filters{flex:none;margin:0;padding:0;border:0;min-height:36px;gap:12px}
+html[data-theme] .library-filters [role=tablist]{gap:4px;align-items:center}
+html[data-theme] .library-filters [role=tab]{height:34px;min-height:34px;min-width:48px;padding:7px 12px;border:0;border-radius:8px;font-size:12px;color:var(--muted)}
+html[data-theme] .library-filters [role=tab][aria-selected=true]{background:var(--ui-tint);color:var(--ui-accent)}
+html[data-theme] .library-filters [role=tab]:after{display:none}
+html[data-theme] .sort-trigger{border-radius:8px;background:transparent;height:36px;padding:0 10px;color:var(--secondary);font-size:12px}
+html[data-theme] .library-scroll{padding:12px 24px 20px}
+html[data-theme] .track,html[data-theme] .track.selected{margin:0;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none}
+html[data-theme] .track .track-summary{padding:16px 12px;min-height:112px;gap:16px;border-radius:12px;background:transparent}
+html[data-theme] .track .track-summary:hover{background:var(--ui-panel)}
+html[data-theme] .track.is-playing .track-summary{background:var(--ui-card)}
+html[data-theme] .track-artwork{width:76px;height:76px;border-radius:8px;border:0;box-shadow:none}
+html[data-theme] .title-version{gap:8px;flex-wrap:wrap}
+html[data-theme] .title-version>button{font-size:15px;font-weight:600;letter-spacing:0;line-height:1.5;color:var(--ink);max-width:100%}
+html[data-theme] .version{font-size:10px;letter-spacing:.2px;background:none;color:var(--muted);padding:0}
+html[data-theme] .track-copy p{font-size:12px;line-height:1.6;color:var(--muted)}
+html[data-theme] .track-inline-actions{gap:4px;margin-top:8px}
+html[data-theme] .track-inline-actions .icon-button{width:30px;height:30px;border-radius:8px;background:transparent;color:var(--muted)}
+html[data-theme] .track-inline-actions .icon-button:hover{background:var(--ui-control);color:var(--ink)}
+html[data-theme] .track-inline-actions .favorite.on{color:var(--ui-accent);background:var(--ui-tint)}
+html[data-theme] .track-summary>[aria-haspopup=menu]{border-radius:8px;background:transparent;color:var(--muted)}
+html[data-theme] .player{margin:0;padding:12px 24px;border-radius:0;border:0;border-top:1px solid var(--line);background:var(--ui-panel);box-shadow:none;backdrop-filter:none}
+html[data-theme] .player-cover{width:48px;height:48px;border-radius:8px}
+html[data-theme] .player-identity .player-name{font-size:14px;font-weight:600;color:var(--ink)}
+html[data-theme] .player-identity p{font-size:11px;color:var(--muted);margin-top:4px}
+html[data-theme] .main-play.icon-button{width:40px;height:40px;background:var(--ui-primary);color:var(--ui-on-primary);box-shadow:none}
+html[data-theme] .player-time{font-size:11px;color:var(--muted)}
+html[data-theme] .sheet{background:var(--ui-canvas);border-color:var(--line);border-radius:16px 0 0 16px;box-shadow:-12px 0 48px #00000018}
+html[data-theme] .sheet.center{border-radius:16px}
+html[data-theme] .sheet-header{padding:24px;border-color:var(--line)}
+html[data-theme] .sheet-header h2{font-size:20px;letter-spacing:0;font-weight:600}
+html[data-theme] .sheet-body{padding:24px}
+html[data-theme] .sheet-footer{background:var(--ui-panel);padding:16px 24px}
+html[data-theme] .button:not(.generate-button):not(.main-play){border-radius:8px;box-shadow:none}
+html[data-theme] .select-control{background:var(--ui-card);color:var(--ink);border-radius:8px}
+html[data-theme] .select-control:hover,html[data-theme] .select-control[data-state=open]{background:var(--ui-control)}
+html[data-theme] :is(.select-menu,.dropdown){background:var(--ui-canvas);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px #00000018}
+html[data-theme] :is(.select-option[data-highlighted],.dropdown [data-highlighted]){background:var(--ui-card)}
+html[data-theme] .select-option[data-state=checked]{background:var(--ui-tint);color:var(--ui-accent)}
+html[data-theme] .settings-tabs{gap:4px;flex-wrap:wrap}
+html[data-theme] .settings-tabs button{border-radius:8px;color:var(--muted)}
+html[data-theme] .settings-tabs button:is([aria-selected=true],[aria-pressed=true]){background:var(--ui-tint);color:var(--ui-accent)}
+html[data-theme] .performance-presets button[aria-pressed=true]{background:var(--ui-tint);color:var(--ui-accent)}
+html[data-theme] .setting-field input:not([type=range]):not([type=checkbox]){background:var(--ui-card);border:0;border-radius:8px;color:var(--ink)}
+html[data-theme] .score-workspace{--score-card:var(--ui-card);--score-control:var(--ui-control);--score-text:var(--ink);--score-muted:var(--muted);--score-line:var(--line);--score-selected:var(--ui-primary);--score-selected-text:var(--ui-on-primary);padding:24px;gap:16px}
+html[data-theme] :is(.score-input-card,.score-result){border-radius:12px}
+html[data-theme] .score-page-title h1{font-size:20px;font-weight:600}
+html[data-theme] .score-view-tabs button[aria-selected=true],html[data-theme] .score-mode button[aria-pressed=true]{background:var(--ui-tint);color:var(--ui-accent)}
+html[data-theme] .score-result-toolbar{padding:16px}
+html[data-theme] .composer .add-reference{background:var(--ui-card);border:0;border-radius:12px;box-shadow:none}
+@media(max-width:1100px){
+ html[data-theme] .library-header{flex-wrap:wrap;padding:16px}
+ html[data-theme] .library-filters{margin-left:auto}
+ html[data-theme] .library-scroll{padding:8px 12px}
+ html[data-theme] .composer{padding:16px 12px 12px}
+ html[data-theme] .track .track-summary{gap:12px}
+ html[data-theme] .brand>span{display:none}
+}
+@media(max-width:700px){
+ html[data-theme] .studio-app{grid-template-rows:56px minmax(0,1fr) 80px}
+ html[data-theme] .app-header{padding:0 12px;gap:8px}
+ html[data-theme] .player{padding:8px 12px}
+ html[data-theme] .score-workspace{padding:12px}
+ html[data-theme] .track-artwork{width:60px;height:60px}
+}
+
+.creation-tabs{display:flex;gap:4px;padding:4px;margin:0 0 14px;background:var(--ui-card);border-radius:10px}.creation-tabs button{flex:1;padding:9px 12px;border-radius:7px;color:var(--muted);font-size:12px}.creation-tabs button[aria-selected=true]{background:var(--ui-control);color:var(--ink);font-weight:600}.abc-field{margin-top:16px}.abc-field .field-heading{display:flex;align-items:center;justify-content:space-between}.abc-field .field-heading button{font-size:11px;color:var(--secondary)}.abc-field textarea{width:100%;min-height:190px;margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--ui-control);color:var(--ink);font-family:ui-monospace,Consolas,monospace;font-size:12px;line-height:1.6;resize:vertical}

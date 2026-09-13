@@ -1,0 +1,223 @@
+/* Linear reference refinement: midnight instrument, one functional accent. */
+:root[data-theme=dark]{
+  --ui-canvas:#08090a;--ui-panel:#0f1011;--ui-card:#161718;--ui-control:#23252a;
+  --ui-hover:#1d1f22;--ui-edge:#23252a;--ui-accent:#dfe2e6;--ui-tint:#dfe2e614;
+  --ink:#ffffff;--text:#ffffff;--secondary:#d0d6e0;--muted:#8a8f98;
+  --line:#23252a;--ui-primary:#d9dbe0;--ui-on-primary:#111214;
+  font-feature-settings:"cv01" on,"ss03" on,"zero" on;
+}
+:root[data-theme=dark] .studio-app{background:var(--ui-canvas);}
+:root[data-theme=dark] .app-header{background:var(--ui-canvas);border-bottom-color:#23252a;padding:0 20px}
+:root[data-theme=dark] .brand strong{font-weight:510;letter-spacing:-.022em}
+:root[data-theme=dark] .brand svg{color:#fff}
+:root[data-theme=dark] .engine-status{color:var(--muted)}
+:root[data-theme=dark] .header-button.button{border-color:#23252a;background:transparent;color:var(--secondary);border-radius:6px}
+:root[data-theme=dark] .header-button.button:hover{background:#ffffff08;border-color:#383b3f}
+:root[data-theme=dark] .workspace-navigation{background:#0b0c0d;border-right-color:#23252a}
+:root[data-theme=dark] .workspace-navigation button{border-radius:6px;color:#8a8f98}
+:root[data-theme=dark] .workspace-navigation button[aria-current=page]{background:linear-gradient(135deg,#d8dbe018,#9ea4b014);color:#e2e4e8}
+:root[data-theme=dark] .composer,:root[data-theme=dark] .library{background:var(--ui-canvas)}
+:root[data-theme=dark] .composer .title-field input{background:#0f1011;color:#fff;border-radius:6px;font-weight:400}
+:root[data-theme=dark] .composer :is(.lyrics-field,.style-field,.vocal-mode-field,.arrangement-field),:root[data-theme=dark] .composer-preferences .creative-card{background:linear-gradient(145deg,#121315,#0e0f10);border:0;border-radius:10px}
+:root[data-theme=dark] .composer .field-heading,:root[data-theme=dark] .creative-heading{color:#d0d6e0}
+:root[data-theme=dark] :is(.field-collapse,.creative-heading h3,.arrangement-field .field-heading label){font-weight:400;letter-spacing:-.011em}
+:root[data-theme=dark] .composer .textarea-shell textarea{color:#d0d6e0}
+:root[data-theme=dark] .composer .vocal-mode-field .option-group>button{border-radius:9999px;color:#8a8f98;background:#ffffff05}
+:root[data-theme=dark] .composer .vocal-mode-field .option-group>button[aria-pressed=true]{background:linear-gradient(135deg,#e4e6e9,#aeb3bc);color:#111214;box-shadow:inset 0 1px #ffffff70,0 4px 18px #c6cbd51a}
+:root[data-theme=dark] .arrangement-options button{border-radius:6px;color:#8a8f98}
+:root[data-theme=dark] .arrangement-options button[aria-pressed=true]{background:#23252a;color:#fff}
+:root[data-theme=dark] .creative-settings .creative-range{background:linear-gradient(to right,#e4f222 var(--range-fill),#383b3f var(--range-fill))}
+:root[data-theme=dark] .creative-settings .creative-range{background:linear-gradient(to right,#dfe2e6 var(--range-fill),#383b3f var(--range-fill))}
+:root[data-theme=dark] .creative-settings .creative-range::-webkit-slider-thumb{background:#dfe2e6;border-color:#0f1011}
+:root[data-theme=dark] .composer-footer{background:var(--ui-canvas)}
+:root[data-theme=dark] .generate-button.button{background:linear-gradient(115deg,#dfe2e6,#aeb4bf 48%,#e6e8eb);color:#111214;border-radius:8px;height:48px;font-weight:510;box-shadow:inset 0 1px #ffffffa6,0 4px 18px #c4cad21c}
+:root[data-theme=dark] .generate-button.button:hover:not(:disabled){background:linear-gradient(115deg,#f0f2f4,#bbc1ca 48%,#f5f6f7);filter:none;transform:translateY(-1px)}
+:root[data-theme=dark] .generate-button.button:active:not(:disabled){transform:translateY(1px)}
+:root[data-theme=dark] .generate-button.button:disabled{background:#23252a;color:#62666d}
+:root[data-theme=dark] .library-header{background:var(--ui-canvas);border-bottom-color:#23252a}
+:root[data-theme=dark] .search-field{background:#0f1011;border:1px solid #23252a;border-radius:6px}
+:root[data-theme=dark] .search-field:focus-within{border-color:#62666d;box-shadow:none}
+:root[data-theme=dark] .library-filters [role=tab]{border-radius:6px;color:#8a8f98}
+:root[data-theme=dark] .library-filters [role=tab][aria-selected=true]{background:linear-gradient(135deg,#dfe2e6,#aeb4be);color:#111214}
+:root[data-theme=dark] .sort-trigger{border-radius:6px;color:#d0d6e0}
+:root[data-theme=dark] .track{border-bottom-color:#23252a}
+:root[data-theme=dark] .track .track-summary{border-radius:6px}
+:root[data-theme=dark] .track .track-summary:hover{background:#0f1011}
+:root[data-theme=dark] .track.is-playing .track-summary{background:#161718}
+:root[data-theme=dark] .track-artwork{border-radius:6px}
+:root[data-theme=dark] .title-version>button{font-weight:400;letter-spacing:-.011em}
+:root[data-theme=dark] .version{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#62666d}
+:root[data-theme=dark] .track-copy p{color:#8a8f98}
+:root[data-theme=dark] .track-inline-actions .icon-button{border-radius:6px}
+:root[data-theme=dark] .track-inline-actions .favorite.on{color:#dfe2e6;background:#dfe2e614}
+:root[data-theme=dark] .composer :is(.textarea-shell,.textarea-shell:focus-within,.textarea-shell:focus){border:0!important;outline:0!important;box-shadow:none!important}
+:root[data-theme=dark] .composer :is(.textarea-shell textarea,.textarea-shell textarea:focus,.textarea-shell textarea:focus-visible){border:0!important;outline:0!important;box-shadow:none!important}
+:root[data-theme=dark] .player{background:#0f1011;border-top-color:#23252a}
+:root[data-theme=dark] .main-play.icon-button{background:linear-gradient(145deg,#e4e6e9,#aeb3bc);color:#111214;border-radius:8px}
+:root[data-theme=dark] .main-play.icon-button:hover{background:linear-gradient(145deg,#f1f3f5,#c0c5cd)}
+:root[data-theme=dark] .sheet{background:#0f1011;border-color:#23252a;border-radius:12px 0 0 12px;box-shadow:-12px 0 32px #0009}
+:root[data-theme=dark] .sheet-header,:root[data-theme=dark] .sheet-footer{border-color:#23252a}
+:root[data-theme=dark] .button:not(.generate-button):not(.main-play){background:transparent;border-color:#23252a;border-radius:6px;color:#d0d6e0}
+:root[data-theme=dark] .button:not(.generate-button):not(.main-play):hover{background:#ffffff08;border-color:#383b3f}
+:root[data-theme=dark] :is(.select-menu,.dropdown){background:#161718;border-color:#383b3f;border-radius:6px;box-shadow:0 4px 32px #08090a99}
+:root[data-theme=dark] .select-option[data-state=checked]{background:linear-gradient(135deg,#dfe2e6,#aeb4be);color:#111214}
+:root[data-theme=dark] .select-option[data-highlighted]{background:#23252a}
+:root[data-theme=dark] .score-workspace{background:#08090a}
+:root[data-theme=dark] .score-workspace :is(.score-input-card,.score-result){border:1px solid #23252a;border-radius:6px}
+:root[data-theme=dark] .score-submit.button{background:linear-gradient(135deg,#dfe2e6,#aeb4be);color:#111214;border-radius:8px}
+:root[data-theme=dark] :is(.track.selected,.track.selected .track-summary,.textarea-shell,.creative-card,.precision-options button,.setting-field input,.setting-field select){border-color:transparent!important;outline:none!important}
+:root[data-theme=dark] :is(button,input,textarea,select,[tabindex]):focus-visible{outline:none!important;box-shadow:inset 0 0 0 1px #dfe2e638!important}
+:root[data-theme=dark] .track.selected .track-summary:before{display:none!important}
+:root[data-theme=dark] .mobile-switch>button[aria-current=page]{color:#dfe2e6;border-color:transparent;background:linear-gradient(135deg,#dfe2e614,#aeb4be0d)}
+@media(prefers-reduced-motion:reduce){:root[data-theme=dark] *{scroll-behavior:auto!important}}
+
+:root[data-theme=dark] .storage-meter{height:6px;border-radius:9999px;background:#23252a;overflow:hidden;margin:18px 0 10px}.storage-meter span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#aeb4be,#e1e4e8)}.storage-total,.storage-list>div{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #23252a;font-size:12px}.storage-total span,.storage-list strong{color:#8a8f98;font-weight:400}.storage-actions{display:flex;gap:8px;margin-top:18px}.storage-actions .button{flex:1}
+
+.batch-toolbar{display:flex;align-items:center;gap:8px;width:100%;font-size:12px}.batch-toolbar span{margin-right:auto}.batch-toolbar button,.manage-trigger{border:0;border-radius:6px;padding:7px 10px;background:var(--ui-control);color:var(--secondary);font-size:11px}.batch-toolbar button:hover,.manage-trigger:hover{background:var(--ui-hover);color:var(--ink)}.batch-check{accent-color:#aeb4be;width:16px;height:16px;flex:none}
+
+.batch-toolbar{min-height:42px;padding:6px 8px;border-radius:8px;background:linear-gradient(110deg,#dfe2e612,#aeb4be0d);animation:batch-enter 220ms cubic-bezier(.22,1,.36,1) both}.batch-toolbar button{transition:background 160ms cubic-bezier(.22,1,.36,1),transform 160ms cubic-bezier(.22,1,.36,1),opacity 160ms}.batch-toolbar button:active:not(:disabled){transform:scale(.96)}.batch-toolbar button:disabled{opacity:.3}.batch-toolbar .batch-danger{color:#d39a9a;background:#6e34341f}.batch-toolbar .batch-danger:hover:not(:disabled){background:#8e48482e;color:#edb4b4}.batch-check{animation:batch-check-in 180ms cubic-bezier(.22,1,.36,1) both}.manage-trigger{margin-left:auto;animation:batch-enter 180ms cubic-bezier(.22,1,.36,1)}@keyframes batch-enter{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}@keyframes batch-check-in{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}@media(prefers-reduced-motion:reduce){.batch-toolbar,.manage-trigger,.batch-check{animation:none!important;transition:none!important}}
+.style-chat-trigger{position:absolute;right:36px;bottom:28px;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#cdd1d8;background:radial-gradient(circle at 30% 25%,#ffffff18,#0f1011 68%);box-shadow:inset 0 0 0 1px #dfe2e65c,0 8px 20px #0006;transition:transform 220ms cubic-bezier(.22,1,.36,1),box-shadow 220ms,color 180ms}.style-chat-trigger:hover{transform:scale(1.08);color:#fff;box-shadow:inset 0 0 0 1px #dfe2e69c,0 10px 26px #0008}.style-chat{display:flex;flex-direction:column;gap:18px;min-height:380px}.style-chat-message{display:flex;gap:10px;align-items:flex-start;color:#d0d6e0;padding:14px;border:1px solid #23252a;border-radius:8px;background:#ffffff04}.style-chat-message svg{color:#dfe2e6;flex:none}.style-chat-message p{font-size:14px;line-height:1.6}.style-chat-suggestions{display:flex;gap:8px;flex-wrap:wrap}.style-chat-suggestions button{border:1px solid #23252a;border-radius:9999px;padding:7px 12px;background:#ffffff05;color:#8a8f98;font-size:12px;transition:background 160ms,color 160ms,transform 160ms}.style-chat-suggestions button:hover{background:#dfe2e614;color:#fff}.style-chat-suggestions button:active{transform:scale(.97)}.style-chat-composer{margin-top:auto;display:flex;align-items:center;gap:10px;border:1px solid #23252a;border-radius:8px;padding:8px 10px;background:#0f1011}.style-chat-composer input{flex:1;border:0;background:transparent;color:#d0d6e0;outline:0;padding:8px;font-size:14px}.style-chat-composer>button{width:34px;height:34px;border-radius:6px;background:#dfe2e6;color:#111214;font-size:20px;transition:transform 160ms}.style-chat-composer>button:active{transform:translateY(1px)}
+/* AI style assistant: large workspace dialog and anchored entry control. */
+.style-field,.lyrics-field,.abc-field{position:relative}
+.style-field .style-chat-trigger{right:14px;bottom:12px;z-index:4}
+.lyrics-field .style-chat-trigger{right:14px;bottom:12px;z-index:4}
+.abc-field .style-chat-trigger{right:14px;bottom:12px;z-index:4}
+.sheet.center:has(.style-chat){width:min(820px,calc(100vw - 48px));height:min(820px,calc(100dvh - 32px));max-height:min(820px,calc(100dvh - 32px))}
+.sheet.center:has(.style-chat) .sheet-body{min-height:580px}
+@media(max-width:600px){.sheet.center:has(.style-chat){width:calc(100vw - 20px);max-height:calc(100dvh - 20px)}.sheet.center:has(.style-chat) .sheet-body{min-height:360px}}
+.style-chat-sheet{width:min(820px,calc(100vw - 48px))!important;height:min(820px,calc(100dvh - 32px))!important;max-height:min(820px,calc(100dvh - 32px))!important}.style-chat-sheet .sheet-body{min-height:580px}@media(max-width:600px){.style-chat-sheet{width:calc(100vw - 20px)!important;height:calc(100dvh - 20px)!important;max-height:calc(100dvh - 20px)!important}.style-chat-sheet .sheet-body{min-height:360px}}
+/* Style assistant entry sits below the editor, centered like the supplied reference. */
+:root[data-theme] .composer .style-field{margin-bottom:54px}
+:root[data-theme] .composer .style-field textarea{height:140px}
+:root[data-theme] .style-field .style-chat-trigger{left:50%;right:auto;top:calc(100% + 12px);bottom:auto;transform:translateX(-50%);width:44px;height:44px}
+:root[data-theme] .style-field .style-chat-trigger:hover{transform:translateX(-50%) scale(1.08)}
+/* Prevent the legacy editor height from covering long style descriptions. */
+:root[data-theme] .composer .style-field .textarea-shell{height:auto!important;overflow:visible}
+:root[data-theme] .composer .style-field .textarea-shell textarea{height:var(--editor-height,170px);min-height:90px;overflow-y:auto;padding-bottom:30px;resize:vertical}
+:root[data-theme] .composer .style-field.field-collapsed .textarea-shell[data-collapsed="true"]{height:0!important;min-height:0!important;max-height:0!important;overflow:clip!important;opacity:0!important;margin:0!important;padding:0!important;pointer-events:none!important}
+:root[data-theme] .composer .style-field .style-count{bottom:8px;right:14px;z-index:2}
+:root[data-theme] .composer .style-field{margin-bottom:68px}
+/* Tighten the assistant anchor rhythm between style and arrangement cards. */
+:root[data-theme] .composer .style-field{margin-bottom:42px}
+:root[data-theme] .style-field .style-chat-trigger{top:calc(100% + 8px);width:40px;height:40px}
+:root[data-theme] .style-field .style-chat-trigger svg{width:20px;height:20px}
+/* The style assistant trigger belongs to the style card itself. */
+:root[data-theme] .composer :is(.style-field,.lyrics-field,.abc-field){margin-bottom:16px;padding-bottom:54px}
+:root[data-theme] :is(.style-field,.lyrics-field,.abc-field) .style-chat-trigger{top:auto;bottom:12px;left:50%;right:auto;width:36px;height:36px;opacity:.48;transform:translateX(-50%) scale(.94);transition:opacity 180ms ease,transform 220ms cubic-bezier(.22,1,.36,1),box-shadow 220ms,color 180ms}
+:root[data-theme] :is(.style-field,.lyrics-field,.abc-field) .style-chat-trigger svg{width:18px;height:18px}
+:root[data-theme] :is(.style-field,.lyrics-field,.abc-field) .style-chat-trigger:focus-visible{opacity:1;transform:translateX(-50%) scale(1.12)}
+@media(hover:hover) and (pointer:fine){:root[data-theme] :is(.style-field,.lyrics-field,.abc-field) .style-chat-trigger:hover{opacity:1;transform:translateX(-50%) scale(1.12)}}
+.style-chat-bubble{max-width:78%;padding:12px 14px;border-radius:8px;font-size:14px;line-height:1.65;white-space:pre-wrap}.style-chat-bubble.user{align-self:flex-end;background:#dfe2e6;color:#111214}.style-chat-bubble.assistant{align-self:flex-start;background:#ffffff08;color:#d0d6e0;border:1px solid #23252a}.style-chat-bubble button{display:block;margin-top:10px;border-radius:6px;background:#dfe2e6;color:#111214;padding:7px 10px;font-size:11px}
+.style-chat-config{padding:16px;border:1px solid #23252a;border-radius:8px;background:#ffffff04}.style-chat-config strong{font-size:14px}.style-chat-config p{font-size:12px;color:#8a8f98;margin:6px 0 12px}.style-chat-config>div{display:flex;gap:8px}.style-chat-config input{flex:1;min-width:0;background:#0f1011;border:1px solid #23252a;border-radius:6px;color:#d0d6e0;padding:9px 10px}.style-chat-config button{border:0;border-radius:6px;background:#dfe2e6;color:#111214;padding:8px 12px;font-size:11px}.style-chat-config small{display:block;color:#d39a9a;margin-top:8px;font-size:11px}
+
+/* ABC and style editors share the same surface, typography, and input states. */
+:root[data-theme] .composer :is(.style-field,.abc-field){background:var(--ui-card);border:0;border-radius:12px;box-shadow:none;color:var(--ink)}
+:root[data-theme=dark] .composer :is(.style-field,.abc-field){background:linear-gradient(145deg,#121315,#0e0f10);border-radius:10px}
+:root[data-theme] .composer .abc-field{padding:16px}
+:root[data-theme] .composer :is(.style-field,.abc-field) .field-heading{color:var(--secondary);min-height:24px;margin-bottom:16px;gap:8px}
+:root[data-theme] .composer .abc-field .field-heading>svg{width:18px;height:18px;color:var(--secondary)}
+:root[data-theme] .composer .abc-field .field-heading label{flex:1;font-size:14px;font-weight:600;line-height:1.5;color:var(--ink)}
+:root[data-theme=dark] .composer .abc-field .field-heading label{font-weight:400;letter-spacing:-.011em;color:#d0d6e0}
+:root[data-theme] .composer .abc-field .field-heading button{padding:7px 0;color:var(--secondary);font-size:11px}
+:root[data-theme] .composer .abc-field textarea{display:block;width:100%;box-sizing:border-box;height:var(--editor-height,170px);min-height:90px;margin:0;padding:4px 0 28px;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--secondary);font:14px/1.85 ui-monospace,SFMono-Regular,Consolas,monospace;resize:vertical}
+:root[data-theme] .composer :is(.style-field,.abc-field) textarea::placeholder{color:var(--muted)}
+:root[data-theme] .composer :is(.style-field,.abc-field) textarea:focus,:root[data-theme] .composer :is(.style-field,.abc-field) textarea:focus-visible{outline:none;box-shadow:none}
+:root[data-theme] .composer :is(.style-field,.abc-field):focus-within{box-shadow:inset 0 0 0 1px var(--ui-edge)}
+:root[data-theme] .composer :is(.style-field,.abc-field) textarea:disabled{opacity:.55;cursor:not-allowed}
+:root[data-theme] .composer .abc-field .arrangement-help{margin:12px 0 0;font-size:12px;line-height:1.75;color:var(--muted)}
+
+/* Mobile workspace panels keep their position while the active surface changes. */
+@media(max-width:949px){
+  html[data-theme] .workbench{position:relative;overflow:hidden}
+  html[data-theme] .workbench>.composer,html[data-theme] .workbench>.library{display:flex;position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);transition:opacity 220ms cubic-bezier(.22,1,.36,1),transform 220ms cubic-bezier(.22,1,.36,1),visibility 0s}
+  html[data-theme] .workbench[data-panel=library]>.composer,html[data-theme] .workbench[data-panel=composer]>.library{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(6px);transition-duration:140ms;transition-timing-function:cubic-bezier(.4,0,1,1),cubic-bezier(.4,0,1,1),step-end}
+}
+
+/* Parameter rhythm: compact 8/12/16 spacing without changing the palette. */
+:root[data-theme] .composer .vocal-mode-field{margin-top:12px;padding:12px 16px}
+:root[data-theme] .composer .vocal-mode-field+.lyrics-field{margin-top:12px}
+:root[data-theme] .composer .style-field{margin-top:12px}
+:root[data-theme] .composer .abc-field.creative-card{margin-top:12px}
+:root[data-theme] .composer .arrangement-field{margin-top:12px;padding:16px}
+:root[data-theme] .composer .arrangement-field .field-heading{margin-bottom:12px}
+:root[data-theme] .composer-preferences{margin-top:12px;margin-bottom:0}
+:root[data-theme] .composer-preferences .creative-settings{gap:12px}
+:root[data-theme] .creative-settings{gap:14px}
+:root[data-theme] .creative-settings .creative-card{padding:16px}
+:root[data-theme] .creative-settings .creative-heading{margin-bottom:12px}
+:root[data-theme] .creative-settings .creative-label{margin-bottom:10px}
+:root[data-theme] .creative-settings .creative-range{margin:12px 0 8px}
+:root[data-theme] .creative-settings .range-captions{margin-bottom:10px}
+:root[data-theme] .creative-settings .setting-help{margin-top:8px}
+:root[data-theme] .precision-options{gap:6px}
+:root[data-theme] .performance-presets{gap:6px}
+:root[data-theme] .performance-presets button{padding:12px 10px}
+:root[data-theme] .performance-section{padding-top:16px;margin-top:16px}
+:root[data-theme] .performance-section h3{margin-bottom:12px}
+:root[data-theme] .performance-toggle{padding:8px 0 12px}
+:root[data-theme] .performance-settings .setting-field{margin:10px 0}
+:root[data-theme] .performance-settings .parameter-grid{column-gap:12px;row-gap:8px}
+:root[data-theme] .developer-toggle{padding:13px 3px}
+:root[data-theme] .developer-content h3{margin:12px 0 10px}
+:root[data-theme] .abc-optional{font-size:10px;font-weight:400;color:var(--muted);margin-left:5px}
+@media(max-width:599px){
+  :root[data-theme] .composer :is(.lyrics-field,.style-field,.vocal-mode-field,.arrangement-field,.creative-card){padding:12px 14px}
+  :root[data-theme] .composer .vocal-mode-field{padding:10px 14px}
+  :root[data-theme] .composer .arrangement-field{padding:12px 14px}
+  :root[data-theme] .composer .field-heading,:root[data-theme] .creative-heading{margin-bottom:10px}
+  :root[data-theme] .creative-settings .creative-card{padding:14px}
+}
+
+/* Keep the quick-start heading above its horizontal suggestion rail. */
+:root[data-theme] .style-chat-suggestions{display:block;min-width:0;overflow:hidden}
+:root[data-theme] .style-chat-suggestions .suggestions-label{display:block;line-height:1.4;margin:0 0 8px}
+
+/* Component geometry pass from the supplied precision-instrument reference.
+   Existing palette and action colors remain owned by the theme files. */
+:root[data-theme]{
+  --component-card-radius:12px;
+  --component-control-radius:6px;
+  --component-element-gap:8px;
+  font-feature-settings:"cv01" on,"ss03" on,"zero" on;
+}
+:root[data-theme] .composer :is(.lyrics-field,.style-field,.vocal-mode-field,.arrangement-field,.creative-card),
+:root[data-theme] :is(.environment-card,.reference-card,.score-input-card,.score-result,.active-generation){
+  border-radius:var(--component-card-radius);
+  box-shadow:none;
+}
+:root[data-theme] .composer :is(.lyrics-field,.style-field,.vocal-mode-field,.arrangement-field,.creative-card){
+  border:1px solid var(--ui-edge);
+}
+:root[data-theme] :is(.button,.header-button.button,.score-submit.button,.main-play.icon-button,.settings-tabs>button,.dropdown,.select-menu,.search-field,.setting-field input,.setting-field select,.option-group>button,.precision-options button,.performance-presets button,.demo-options>button,.score-mode,.score-view-tabs,.score-history-list>button,.style-chat-config,.chat-input,.chat-message.user,.reference-play,.reference-wave,.toast,.playback-error){
+  border-radius:var(--component-control-radius);
+}
+:root[data-theme] .button:not(.generate-button):not(.main-play){
+  min-height:36px;
+  padding:8px 12px;
+}
+:root[data-theme] .generate-button.button{border-radius:var(--component-control-radius)}
+:root[data-theme] .composer .vocal-mode-field .option-group>button,
+:root[data-theme] .reference-mode,
+:root[data-theme] .quantity-options{border-radius:9999px}
+:root[data-theme] .composer .field-heading,
+:root[data-theme] .creative-heading{gap:var(--component-element-gap);margin-bottom:12px}
+:root[data-theme] .composer :is(.lyrics-field,.style-field,.vocal-mode-field,.arrangement-field,.creative-card){padding:16px}
+:root[data-theme] .composer .field-collapsed{padding:15px 16px}
+:root[data-theme] .composer .style-field .textarea-shell{border-radius:0}
+:root[data-theme] .composer .style-field .style-chat-trigger{border-radius:9999px}
+:root[data-theme] .library-header{padding:16px 20px 10px}
+:root[data-theme] .sheet,:root[data-theme] .sheet.center{border-radius:12px}
+:root[data-theme] .sheet-header,:root[data-theme] .sheet-body{padding-left:24px;padding-right:24px}
+:root[data-theme] .score-result-toolbar,:root[data-theme] .score-code-tools{padding-left:16px;padding-right:16px}
+:root[data-theme] .score-history-list>button{padding:12px}
+:root[data-theme] .reference-card{border:1px solid var(--ui-edge)}
+:root[data-theme] .reference-wave{border-radius:var(--component-control-radius)}
+:root[data-theme] .style-chat-suggestions button{border-radius:9999px}
+:root[data-theme] .chat-message.assistant{border-radius:var(--component-control-radius)}
+:root[data-theme] .inline-warning,:root[data-theme] .queued-notice,:root[data-theme] .recovery-notice,:root[data-theme] .success-notice{border-radius:var(--component-control-radius)}
+:root[data-theme] .composer :is(.style-field,.lyrics-field,.abc-field){padding:16px 16px 54px}
+:root[data-theme] .composer .field-collapsed{padding:15px 16px}
+@media(max-width:599px){
+  :root[data-theme] .composer :is(.style-field,.lyrics-field,.abc-field){padding:12px 14px 50px}
+  :root[data-theme] .composer .field-collapsed{padding:12px 14px}
+}

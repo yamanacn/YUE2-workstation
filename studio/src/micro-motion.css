@@ -1,0 +1,40 @@
+:root{--ease:cubic-bezier(.22,1,.36,1);--motion-settle:cubic-bezier(.22,1,.36,1);--motion-exit:cubic-bezier(.4,0,1,1);--motion-quick:140ms;--motion-normal:280ms;interpolate-size:allow-keywords}
+/* Visual feedback does not delay pointer tracking or audio seeking. */
+button,[role="menuitem"],[role="tab"],input,textarea,select,a{
+ transition:background-color 180ms var(--motion-settle),color 180ms var(--motion-settle),border-color 180ms var(--motion-settle),box-shadow 180ms var(--motion-settle),opacity 180ms var(--motion-settle),scale 140ms var(--motion-settle);
+}
+button:not(:disabled):not([role="slider"]):active,[role="menuitem"]:active{scale:.975}
+.icon-button:not(:disabled):active,.reference-play:active{scale:.92}
+button:disabled{scale:1}
+button svg{transition:rotate 240ms var(--motion-settle),transform 240ms var(--motion-settle),color 180ms var(--motion-settle)}
+.track,.field,.reference-card,.settings-section,.preference-row,.composer,.library,.player{transition:background-color 280ms var(--motion-settle),border-color 240ms var(--motion-settle),box-shadow 240ms var(--motion-settle)}
+/* Intrinsic height interpolation retains textarea values and selection. */
+.textarea-shell[data-collapsed],#reference-cover-settings{height:auto;overflow:clip;opacity:1;transition:height 300ms var(--motion-settle),opacity 200ms var(--motion-settle),margin 300ms var(--motion-settle),padding 300ms var(--motion-settle)}
+.textarea-shell[data-collapsed="true"],#reference-cover-settings[data-collapsed="true"]{height:0!important;min-height:0!important;opacity:0;margin-block:0!important;padding-block:0!important;pointer-events:none}
+.field{transition:background-color 280ms var(--motion-settle)}
+.dialog-backdrop[data-state="open"]{animation:ui-fade-in 220ms var(--motion-settle) both}
+.dialog-backdrop[data-state="closed"]{animation:ui-fade-out 180ms var(--motion-exit) both}
+.sheet[data-state="open"]{animation:ui-sheet-in 320ms var(--motion-settle) both}
+.sheet[data-state="closed"]{animation:ui-sheet-out 200ms var(--motion-exit) both}
+.sheet.center[data-state="open"]{animation:ui-modal-in 280ms var(--motion-settle) both}
+.sheet.center[data-state="closed"]{animation:ui-modal-out 180ms var(--motion-exit) both}
+.keep-mounted[data-state="closed"]{visibility:hidden!important;pointer-events:none!important}
+.dropdown{transform-origin:var(--radix-dropdown-menu-content-transform-origin)}
+.dropdown[data-state="open"]{animation:ui-menu-in 200ms var(--motion-settle) both}
+.dropdown[data-state="closed"]{animation:ui-menu-out 140ms var(--motion-exit) both}
+.empty-state,.queued-notice,.recovery-notice,.inline-warning,.success-notice,.field-error:not(:empty),.reference-error,.reference-file,.reference-cover,.settings-section{animation:ui-content-in 280ms var(--motion-settle) both}
+.track-list{position:relative}
+@keyframes ui-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes ui-fade-out{to{opacity:0}}
+@keyframes ui-sheet-in{from{opacity:0;translate:28px 0}to{opacity:1;translate:0 0}}
+@keyframes ui-sheet-out{to{opacity:0;translate:18px 0}}
+@keyframes ui-modal-in{from{opacity:0;scale:.98;translate:0 8px}to{opacity:1;scale:1;translate:0 0}}
+@keyframes ui-modal-out{to{opacity:0;scale:.99;translate:0 4px}}
+@keyframes ui-menu-in{from{opacity:0;scale:.97;translate:0 -4px}to{opacity:1;scale:1;translate:0 0}}
+@keyframes ui-menu-out{to{opacity:0;scale:.98;translate:0 -2px}}
+@keyframes ui-content-in{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
+/* Covers portals as well as the application tree. */
+html[data-reduced-motion="true"] *,html[data-reduced-motion="true"] *::before,html[data-reduced-motion="true"] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+html[data-reduced-motion="true"] button:active{scale:1!important}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}button:active{scale:1!important}}
+.textarea-shell[data-collapsed="true"]{border-block-width:0!important}

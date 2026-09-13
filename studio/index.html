@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f1f0ef" />
+    <meta name="description" content="YuE2 本地音乐创作工作室：歌词、风格、作品与试听。" />
+    <title>YuE2 音乐工作室</title>
+    <script>
+      try { document.documentElement.dataset.theme = localStorage.getItem('yue2-studio-theme-v1') === 'light' ? 'light' : 'dark'; }
+      catch { document.documentElement.dataset.theme = 'dark'; }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

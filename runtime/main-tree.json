@@ -1,0 +1,236 @@
+[
+  {
+    "type": "directory",
+    "oid": "34e8cbbfdf15ebe726e9d8b38a58a97cf06c8292",
+    "size": 0,
+    "path": "assets"
+  },
+  {
+    "type": "directory",
+    "oid": "04fd71602d0f6e16db86c507d203a8480670b1c0",
+    "size": 0,
+    "path": "assets/audio"
+  },
+  {
+    "type": "directory",
+    "oid": "3ce5a44abd2e04b147fc7a627f3edb2cc166c478",
+    "size": 0,
+    "path": "examples"
+  },
+  {
+    "type": "directory",
+    "oid": "1651b8ca6a5662b2abcc5d2939aa9205bf52576b",
+    "size": 0,
+    "path": "licenses"
+  },
+  {
+    "type": "file",
+    "oid": "91fe29481f9dd9d34d37d0a89b67982e3572f255",
+    "size": 2134,
+    "path": ".gitattributes"
+  },
+  {
+    "type": "file",
+    "oid": "5b4b50fd3e4d4cadbc54c49cab3552d0eb303d48",
+    "size": 20309,
+    "path": "LICENSE"
+  },
+  {
+    "type": "file",
+    "oid": "f7f5836313e5d8b58cca08b6567352d864fa1ae9",
+    "size": 19050,
+    "path": "README.md"
+  },
+  {
+    "type": "file",
+    "oid": "8178461b1f6ec6f9977cf0e03b93abd39f5ba1af",
+    "size": 793,
+    "path": "THIRD_PARTY_NOTICES.md"
+  },
+  {
+    "type": "file",
+    "oid": "f785f2454c4b13a9982c861204ddddb7f9d2972e",
+    "size": 407643,
+    "lfs": {
+      "oid": "53345d556ec1762dc7071b76ab0d79518c8cdf52bbf48ad434c3c34926ff74a3",
+      "size": 407643,
+      "pointerSize": 131
+    },
+    "xetHash": "40b768d3c4b103b07077002d2e513365b37c9d23b059bcffdb5b81661edb531a",
+    "path": "assets/architecture.png"
+  },
+  {
+    "type": "file",
+    "oid": "1daef06fb6b0d5fc67e8d249e0a63437b0c2fa75",
+    "size": 4559660,
+    "lfs": {
+      "oid": "2920e32d6723181da2b26b766b11b34c78f162417229f7394a90a06d2db50141",
+      "size": 4559660,
+      "pointerSize": 132
+    },
+    "xetHash": "9314774ec49afc6e0e34118b9657f5154ac23423574d733984c0db964a63bcbc",
+    "path": "assets/audio/auld-lang-syne-jazz-funk-cover.mp3"
+  },
+  {
+    "type": "file",
+    "oid": "ad751f2d478373be533332572a3dd1d51bc0d9a1",
+    "size": 7215020,
+    "lfs": {
+      "oid": "997171848c1fbabeece4885877dd4aa62374576042392e0583ba64b038c4af48",
+      "size": 7215020,
+      "pointerSize": 132
+    },
+    "xetHash": "d45f685de4e6c8266ece42f4996b1be02c3f93c2525ee4f2d115305b0b4f1590",
+    "path": "assets/audio/cyber-metal.mp3"
+  },
+  {
+    "type": "file",
+    "oid": "9a6840246c61e0a0e4585bd0f5dc3be3df6e7cbf",
+    "size": 4432,
+    "path": "assets/audio/examples.json"
+  },
+  {
+    "type": "file",
+    "oid": "3d19fb390f76c9de3114e31250a549ef698e708f",
+    "size": 1657196,
+    "lfs": {
+      "oid": "44d15f0e04949207f44bbaf07c392012fbae84a1e4d89f44e4b055a0c21fa845",
+      "size": 1657196,
+      "pointerSize": 132
+    },
+    "xetHash": "a90e6f54eb9e097efa3260258b1403e9c52eb9794e3cc60eff1730b334424780",
+    "path": "assets/audio/jingle-bells-heavy-metal-cover.mp3"
+  },
+  {
+    "type": "file",
+    "oid": "3ecc10cc7611d472edaf84b1b91316633ee9ca9f",
+    "size": 5633900,
+    "lfs": {
+      "oid": "87fec41a160e430cfde543be76e1da81f7442ff3e0aca09455cf8fea9048cc63",
+      "size": 5633900,
+      "pointerSize": 132
+    },
+    "xetHash": "000c4ab45c3e94e9903742401dd31328ba6604820e61b3f8e9583755f556fd00",
+    "path": "assets/audio/passion.mp3"
+  },
+  {
+    "type": "file",
+    "oid": "84bd36a9e76bdaa282c5775716537b26c3cec9f9",
+    "size": 4885100,
+    "lfs": {
+      "oid": "54f642933f796e4244f0a308d3d0603c09b4d87f04e0bc42fbcbb9df0bffbcf9",
+      "size": 4885100,
+      "pointerSize": 132
+    },
+    "xetHash": "ad71699131aaa23648269c07096d54c0a152d00080e0dfd7c9b7fc5fa2ecd9f9",
+    "path": "assets/audio/tonight-awake.mp3"
+  },
+  {
+    "type": "file",
+    "oid": "68895acfdd9f75f76d24efa93229f5410dbe3b43",
+    "size": 6838316,
+    "lfs": {
+      "oid": "fbd0cc2131924fee15c8f5e7519c577f8cd53005302508cc9d959461d31b935f",
+      "size": 6838316,
+      "pointerSize": 132
+    },
+    "xetHash": "9cbd168d0faf4c34f6501722b00619ad039fccb96db7a6da3994584866ef0470",
+    "path": "assets/audio/zuixuan-ballad-cover.mp3"
+  },
+  {
+    "type": "file",
+    "oid": "f7e7ee0cd3c7bce68e1eab77ac4c0af2a4f414c4",
+    "size": 147143,
+    "lfs": {
+      "oid": "c52f18c1aaad89b6411db96ad2625f9fd3547d08577fe071940f4ca5aac798e5",
+      "size": 147143,
+      "pointerSize": 131
+    },
+    "xetHash": "a2997b73a9df5e6838320692eb56e2c42de4278069eb30ac078cde546c7f81aa",
+    "path": "assets/figure1.png"
+  },
+  {
+    "type": "file",
+    "oid": "544eb1bdb5d0548ab7a2fda5839c23d154415dd0",
+    "size": 14085,
+    "path": "assets/logo.png"
+  },
+  {
+    "type": "file",
+    "oid": "9584e50ba9d6e487690544e14dd7555edbe27973",
+    "size": 959,
+    "path": "config.json"
+  },
+  {
+    "type": "file",
+    "oid": "ce9fa69bd5272bcb1b5201348cb5c1702e7de7a5",
+    "size": 1734,
+    "path": "examples/tonight-awake.json"
+  },
+  {
+    "type": "file",
+    "oid": "041d89f512a1b79c13e1a3dee54b5a9bc7c26cad",
+    "size": 204,
+    "path": "generation_config.json"
+  },
+  {
+    "type": "file",
+    "oid": "e9663595cc28938f88d6299acd3ba791542e4c0c",
+    "size": 1076,
+    "path": "licenses/SnakeBeta-NVIDIA-MIT.txt"
+  },
+  {
+    "type": "file",
+    "oid": "f119f94cf2ec8269020dd0d8140a4c4b83cc65a1",
+    "size": 1069,
+    "path": "licenses/stable-audio-tools-MIT.txt"
+  },
+  {
+    "type": "file",
+    "oid": "3314789dffff7318458e58ea9c615157ac59774a",
+    "size": 7261441640,
+    "lfs": {
+      "oid": "1d55c42c1a9875c34f5d736e15078449992b044e807ce2a138e6cf289a1e59e9",
+      "size": 7261441640,
+      "pointerSize": 135
+    },
+    "xetHash": "859c638c234122391d7f895554060ccacec4b40f5078b2a5bc1423628985e528",
+    "path": "model.safetensors"
+  },
+  {
+    "type": "file",
+    "oid": "9e2b9924b6e277cab5905771ac9afc068267ee8b",
+    "size": 32983,
+    "path": "modeling_yue2.py"
+  },
+  {
+    "type": "file",
+    "oid": "9b9b0e0416d84d7c88333eb261c77e5fe2d7f7be",
+    "size": 2561218,
+    "path": "qwen.tiktoken"
+  },
+  {
+    "type": "file",
+    "oid": "5ac0adb948bf8d8987ce7a1401fc39d0842b709d",
+    "size": 179,
+    "path": "weights_manifest.json"
+  },
+  {
+    "type": "file",
+    "oid": "f8214009f5bb5425319e4519b12e4853ad72acf3",
+    "size": 466,
+    "path": "yue2_generation_config.json"
+  },
+  {
+    "type": "file",
+    "oid": "b9cd10623d5caa0b402c91f40c7eeaaf79bbf67a",
+    "size": 60853,
+    "path": "yue2_infer-0.1.3-py3-none-any.whl"
+  },
+  {
+    "type": "file",
+    "oid": "8e2b7056612ca630c62b2365afe7a92fc2d94e1d",
+    "size": 66117,
+    "path": "yue2_infer-0.1.5-py3-none-any.whl"
+  }
+]

@@ -1,0 +1,38 @@
+/* Quiet liquid light, anchored to the same anatomy as a finished work. */
+.generating-track{--flow-core:174,157,186;--flow-pearl:213,204,218;position:relative;border-bottom:1px solid var(--line);animation:generating-arrive .26s cubic-bezier(.22,1,.36,1) both}
+.generating-track .track-summary{min-height:152px}
+.generating-track .track-copy{min-width:0}
+.generating-cover{isolation:isolate;overflow:hidden}
+.generating-cover img{filter:saturate(.55) brightness(.83);transition:filter .8s}
+.cover-light{position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 25%,#f0e7fb12 43%,#f8efff2b 50%,transparent 68%);transform:translateX(-35%);animation:cover-drift 8s ease-in-out infinite;pointer-events:none}
+.generation-flow{position:relative;height:24px;width:min(100%,720px);margin-top:15px;isolation:isolate}
+.flow-rail{position:absolute;left:0;right:0;top:11px;height:2px;background:rgba(var(--flow-core),.12);border-radius:50%}
+.flow-body{position:absolute;height:100%;width:100%;left:0;top:0;transform-origin:left center;transition:transform .22s cubic-bezier(.22,1,.36,1);min-width:0}
+.flow-mist,.flow-silk,.flow-current,.flow-front{position:absolute;pointer-events:none}
+.flow-mist{inset:5px -2px;background:linear-gradient(90deg,rgba(157,139,177,.02),rgba(157,139,177,.16) 32%,rgba(213,190,220,.24) 62%,rgba(234,190,210,.16) 82%,transparent);filter:blur(7px);border-radius:60%;will-change:background-position}
+.flow-silk{left:0;right:0;top:10px;height:3px;background:linear-gradient(90deg,rgba(157,139,177,.08),rgba(190,160,205,.5) 32%,rgba(235,205,225,.68) 58%,rgba(225,170,202,.44) 78%,rgba(207,194,218,.13));border-radius:70% 40% 60% 30%;filter:blur(.6px);will-change:opacity}
+.flow-current{inset:7px 0;background:linear-gradient(105deg,transparent 10%,rgba(194,165,210,.12) 28%,rgba(244,220,235,.45) 44%,rgba(222,168,205,.3) 56%,rgba(178,153,198,.18) 68%,transparent 86%);background-size:230% 100%;filter:blur(2px);border-radius:60%;animation:silk-stream 6.8s linear infinite;will-change:background-position}
+.flow-front{right:-2px;top:9px;width:9px;height:5px;border-radius:50%;background:rgba(var(--flow-pearl),.48);filter:blur(2px)}
+.generation-flow[data-known=false] .flow-body{overflow:hidden}
+.generation-flow[data-known=false] .flow-silk{opacity:.3}
+.generation-flow[data-known=false] .flow-mist{background:linear-gradient(90deg,transparent,rgba(var(--flow-core),.14),transparent);background-size:230% 100%;animation:silk-stream 8s linear infinite}
+.generation-flow[data-known=false] .flow-front{display:none}
+.generation-status{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:11px;line-height:20px;margin-top:1px;min-height:20px}
+.generation-status>button{font:inherit;color:inherit;padding:0;text-align:left}
+.generation-status>button:hover{color:var(--ink)}
+.generation-time{font-size:10px;font-variant-numeric:tabular-nums;opacity:.65}
+.generation-phase-percent{font-size:10px;opacity:.55;margin-left:auto}
+.generation-ellipsis{margin-left:2px;opacity:.6}
+.is-cancelling .flow-body,.is-cancelling .cover-light{opacity:.3}
+.is-cancelling *{animation-play-state:paused!important}
+.generating-track[data-offscreen=true] .cover-light,.generating-track[data-offscreen=true] .flow-current,.generating-track[data-offscreen=true] .flow-mist{animation-play-state:paused}
+[data-theme=dark] .generating-track{border:0;border-radius:0;--flow-core:157,139,177;--flow-pearl:207,194,218}
+[data-theme=dark] .generating-track .track-summary{min-height:152px;background:transparent}
+[data-theme=dark] .generating-track .generation-status{color:#929098}
+[data-theme=dark] .generation-status>button:hover{color:#d3cbd9}
+@keyframes silk-stream{from{background-position:160% 50%}to{background-position:-70% 50%}}
+@keyframes cover-drift{0%,100%{transform:translateX(-35%);opacity:.2}50%{transform:translateX(35%);opacity:.7}}
+@keyframes generating-arrive{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.generating-track .track-summary{gap:14px;min-height:136px}.generation-flow{margin-top:10px}.generation-phase-percent{display:none}.generation-status{gap:8px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.generating-track,.generating-track *{animation:none!important;transition:none!important}}
+.reduced-motion .generating-track,.reduced-motion .generating-track *{animation:none!important;transition:none!important}

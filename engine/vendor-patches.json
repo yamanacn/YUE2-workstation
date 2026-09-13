@@ -1,0 +1,9 @@
+{
+  "baseRevision": "a621dcc003143844927ae7d2a1295d05f356336c",
+  "patchSet": "fp8-cuda-graph-v1",
+  "files": {
+    "src/yue2/cuda_graph.py": "777f615e3ce8a4aeaa4e1fcc297bbaf0338de3e7bca9083477c2afa53d3502b7",
+    "src/yue2/quantization.py": "b8d140b1f0531662caf0fbe8094ce47894703d5afb49a739c87993af5d280958",
+    "src/yue2/sampling.py": "2395ca8c385051177d4afcb0862f30f351071b91333d0e596b3d3993aa34260f"
+  }
+}

@@ -1,0 +1,110 @@
+[
+  {
+    "type": "directory",
+    "oid": "bbf5e625f753bdf94056c79a719247de3e706e1d",
+    "size": 0,
+    "path": "assets"
+  },
+  {
+    "type": "directory",
+    "oid": "1651b8ca6a5662b2abcc5d2939aa9205bf52576b",
+    "size": 0,
+    "path": "licenses"
+  },
+  {
+    "type": "file",
+    "oid": "879737759a9148efb188533c968c3909e48cc6e9",
+    "size": 1634,
+    "path": ".gitattributes"
+  },
+  {
+    "type": "file",
+    "oid": "5b4b50fd3e4d4cadbc54c49cab3552d0eb303d48",
+    "size": 20309,
+    "path": "LICENSE"
+  },
+  {
+    "type": "file",
+    "oid": "51e10824fd2aadae89ef6d8e9bd9c782a99a786c",
+    "size": 8975,
+    "path": "README.md"
+  },
+  {
+    "type": "file",
+    "oid": "8178461b1f6ec6f9977cf0e03b93abd39f5ba1af",
+    "size": 793,
+    "path": "THIRD_PARTY_NOTICES.md"
+  },
+  {
+    "type": "file",
+    "oid": "f785f2454c4b13a9982c861204ddddb7f9d2972e",
+    "size": 407643,
+    "lfs": {
+      "oid": "53345d556ec1762dc7071b76ab0d79518c8cdf52bbf48ad434c3c34926ff74a3",
+      "size": 407643,
+      "pointerSize": 131
+    },
+    "xetHash": "40b768d3c4b103b07077002d2e513365b37c9d23b059bcffdb5b81661edb531a",
+    "path": "assets/architecture.png"
+  },
+  {
+    "type": "file",
+    "oid": "f7e7ee0cd3c7bce68e1eab77ac4c0af2a4f414c4",
+    "size": 147143,
+    "lfs": {
+      "oid": "c52f18c1aaad89b6411db96ad2625f9fd3547d08577fe071940f4ca5aac798e5",
+      "size": 147143,
+      "pointerSize": 131
+    },
+    "xetHash": "a2997b73a9df5e6838320692eb56e2c42de4278069eb30ac078cde546c7f81aa",
+    "path": "assets/figure1.png"
+  },
+  {
+    "type": "file",
+    "oid": "544eb1bdb5d0548ab7a2fda5839c23d154415dd0",
+    "size": 14085,
+    "path": "assets/logo.png"
+  },
+  {
+    "type": "file",
+    "oid": "f68832bef1b99f53dd70460f6b0d336971a664b8",
+    "size": 1378,
+    "path": "config.json"
+  },
+  {
+    "type": "file",
+    "oid": "e9663595cc28938f88d6299acd3ba791542e4c0c",
+    "size": 1076,
+    "path": "licenses/SnakeBeta-NVIDIA-MIT.txt"
+  },
+  {
+    "type": "file",
+    "oid": "f119f94cf2ec8269020dd0d8140a4c4b83cc65a1",
+    "size": 1069,
+    "path": "licenses/stable-audio-tools-MIT.txt"
+  },
+  {
+    "type": "file",
+    "oid": "f02d9dc133e0c3013de3431295d587cb105d0512",
+    "size": 530512720,
+    "lfs": {
+      "oid": "807ce9d5149fa27c5ad3e6582058469852e908f6c5acc8c8aa338e7ab7751346",
+      "size": 530512720,
+      "pointerSize": 134
+    },
+    "xetHash": "b6cb851f13736e506bc382873406df82deb6a7e9019022e8c9b6995156890c00",
+    "path": "model.safetensors"
+  },
+  {
+    "type": "file",
+    "oid": "79014d26619982b3eaa9b9c987c31d6f931930b0",
+    "size": 25265,
+    "path": "modeling_vae.py"
+  },
+  {
+    "type": "file",
+    "oid": "c663bbfcc6238d5b35cd61bee56e6aab4c7e3876",
+    "size": 178,
+    "path": "weights_manifest.json"
+  }
+]

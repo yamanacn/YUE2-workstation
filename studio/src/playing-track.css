@@ -1,0 +1,26 @@
+/* Playback feedback follows the audio state, independently of detail selection. */
+.track.selected .track-summary::before{display:none!important}
+.track .track-summary{position:relative;isolation:isolate;transition:background-color 220ms cubic-bezier(.22,1,.36,1)}
+.track.is-playing .track-summary{background:#ffffffa6}
+[data-theme=dark] .track.is-playing .track-summary{background:#202024}
+[data-theme=dark] .track.is-playing .track-summary:hover{background:#242429}
+.track.is-playing .title-version>button{color:#282733}
+[data-theme=dark] .track.is-playing .title-version>button{color:#faf9fc}
+.track.is-playing .track-play-icon{opacity:1;background:#08080b45}
+.playing-edge{position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;overflow:hidden;z-index:-1;opacity:0;transition:opacity 320ms cubic-bezier(.22,1,.36,1);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude}
+.playing-edge>span{position:absolute;inset:-100% -60%;background:conic-gradient(from 0deg,transparent 0deg,#968cb44d 55deg,#b0afb975 85deg,transparent 125deg,transparent 185deg,#93adb34d 240deg,#c1b5a65c 270deg,transparent 310deg);animation:playing-edge-drift 16s linear infinite;animation-play-state:paused}
+.track.is-playing .playing-edge{opacity:1}
+.track.is-playing .playing-edge>span{animation-play-state:running}
+.now-playing-badge{display:inline-flex;align-items:center;gap:6px;flex-shrink:0;white-space:nowrap;padding:4px 8px;border-radius:20px;background:#66607710;color:#615c70;font-size:10px;font-weight:500;line-height:16px;animation:playing-badge-in 220ms cubic-bezier(.22,1,.36,1) both}
+[data-theme=dark] .now-playing-badge{background:#d4cdec10;color:#d1cadf}
+.playing-meter{height:12px;width:14px;display:flex;align-items:center;gap:2px}
+.playing-meter i{width:2px;height:10px;border-radius:2px;background:currentColor;transform-origin:center;animation:playing-meter-breathe 1100ms cubic-bezier(.45,0,.55,1) infinite alternate}
+.playing-meter i:nth-child(2){animation-delay:-650ms;height:12px}
+.playing-meter i:nth-child(3){animation-delay:-250ms;height:8px}
+.playing-meter i:nth-child(4){animation-delay:-850ms;height:11px}
+.track.is-buffering .playing-meter i,.track.is-buffering .playing-edge>span{animation-play-state:paused}
+@keyframes playing-meter-breathe{from{transform:scaleY(.3)}to{transform:scaleY(1)}}
+@keyframes playing-edge-drift{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes playing-badge-in{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.playing-edge>span,.playing-meter i,.now-playing-badge{animation:none!important}}
+html[data-reduced-motion=true] .playing-edge>span,html[data-reduced-motion=true] .playing-meter i{animation:none!important}

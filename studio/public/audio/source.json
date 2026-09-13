@@ -1,0 +1,10 @@
+{
+  "title": "今晚不眠",
+  "source": "https://huggingface.co/m-a-p/YuE2-3B/resolve/1a96eca688d6ae5d7f0feb88573fec89920fcd19/assets/audio/tonight-awake.mp3",
+  "origin": "YuE2 official listening demo, earlier checkpoint",
+  "duration_seconds": 203.52,
+  "sample_rate": 48000,
+  "channels": 2,
+  "sha256": "54f642933f796e4244f0a308d3d0603c09b4d87f04e0bc42fbcbb9df0bffbcf9",
+  "use": "Explicitly labelled audio preview; does not correspond to UI sample lyrics and is not generated on this device."
+}

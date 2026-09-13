@@ -1,0 +1,15 @@
+/* Score view behaves as one continuous document: long sheets grow downward. */
+.score-workspace{height:auto;min-height:100%;overflow:visible;display:block;padding-bottom:48px}
+.workspace-pages>.score-module{overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
+.workspace-pages>.score-module .score-workspace{min-height:100%;height:auto}
+.score-workspace>.score-page-header,.score-workspace>.score-notice,.score-workspace>.score-input-card,.score-workspace>.score-result{margin-bottom:16px}
+.score-result{height:auto;min-height:0;display:block;overflow:visible}
+.score-stage{height:auto;min-height:320px;display:block;overflow:visible}
+.score-paper-scroll{height:auto;min-height:320px;overflow:visible;padding:24px 24px 64px}
+.score-pages{width:min(100%,1200px)!important;min-width:0}
+.score-pages img{max-width:100%;height:auto}
+.score-abc-view{height:auto;min-height:320px}
+.score-code-scroll{height:auto;max-height:none;overflow:auto}
+.score-result-toolbar{position:sticky;top:0;z-index:2;background:var(--score-card)}
+@media(max-width:950px){.score-paper-scroll{padding:16px 16px 56px}}
+@media(max-width:600px){.score-paper-scroll{padding:12px 10px 48px}}
