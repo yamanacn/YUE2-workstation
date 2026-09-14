@@ -3,7 +3,7 @@ from pathlib import Path
 from unittest.mock import patch
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
-from engine.reference_files import install_reference_routes
+from engine.reference_files import install_reference_routes, register_reference_path
 class ReferenceTests(unittest.TestCase):
  def test_path_only_and_missing(self):
   with tempfile.TemporaryDirectory() as root:
@@ -40,5 +40,19 @@ class ReferenceTests(unittest.TestCase):
    with patch('engine.reference_files._native_pick',return_value=(True,str(source))): item=c.post('/api/v1/references/pick',json={'picker':'native'}).json()
    with patch('engine.cover.transcribe_reference',return_value='raw abc') as transcribe, patch('engine.abc_processor.ABCReferenceProcessor.process',return_value='processed abc') as process:
     response=c.post('/api/v1/references/'+item['id']+'/transcribe',json={'preserve':'full','strength':'faithful'})
-   self.assertEqual(response.status_code,200,response.text);payload=response.json();self.assertEqual(payload['abc'],'processed abc');self.assertEqual(payload['recommendedCot'],'full');transcribe.assert_called_once();process.assert_called_once_with('raw abc','faithful')
+  self.assertEqual(response.status_code,200,response.text);payload=response.json();self.assertEqual(payload['abc'],'processed abc');self.assertEqual(payload['recommendedCot'],'full');transcribe.assert_called_once();process.assert_called_once_with('raw abc','faithful')
+ def test_register_existing_path_never_copies_audio(self):
+  with tempfile.TemporaryDirectory() as root:
+   data=Path(root)/'data';source=Path(root)/'take.flac';source.write_bytes(b'fLaCtest')
+   item=register_reference_path(data,source,'作品.flac')
+   self.assertEqual(item['path'],str(source.resolve()));self.assertEqual(item['name'],'作品.flac')
+   self.assertEqual(len(list(data.iterdir())),1)
+   app=FastAPI();install_reference_routes(app,data);c=TestClient(app)
+   self.assertEqual(c.get('/api/v1/references/'+item['id']+'/audio').content,b'fLaCtest')
+   source.unlink();self.assertEqual(c.get('/api/v1/references/'+item['id']).status_code,404)
+ def test_register_rejects_non_audio(self):
+  with tempfile.TemporaryDirectory() as root:
+   data=Path(root)/'data';source=Path(root)/'notes.txt';source.write_text('x',encoding='utf-8')
+   with self.assertRaises(Exception): register_reference_path(data,source)
+   self.assertFalse((data/'reference-paths.json').exists())
 if __name__=='__main__':unittest.main()

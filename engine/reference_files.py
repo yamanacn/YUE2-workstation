@@ -7,6 +7,32 @@ from fastapi.responses import FileResponse
 
 _AUDIO_SUFFIXES={'.wav','.mp3','.flac','.m4a','.ogg','.aac','.opus'}
 _PICKER_FLAGS=0x00000800|0x00001000|0x00080000|0x00000008|0x00000004
+_REGISTRY_LOCK=threading.Lock()
+
+def registry_path(data): return Path(data)/'reference-paths.json'
+
+def _read_registry(data):
+    registry=registry_path(data)
+    return json.loads(registry.read_text(encoding='utf-8')) if registry.exists() else {}
+
+def _write_registry(data,records):
+    registry=registry_path(data)
+    registry.parent.mkdir(parents=True,exist_ok=True)
+    temp=registry.with_suffix('.tmp');temp.write_text(json.dumps(records,ensure_ascii=False),encoding='utf-8');temp.replace(registry)
+
+def read_registry(data):
+    """Return every registered reference; keys are opaque ids."""
+    with _REGISTRY_LOCK: return _read_registry(data)
+
+def register_reference_path(data,path,name=None):
+    """Register an existing audio file by path; the audio itself is never copied."""
+    source=Path(path)
+    if not source.is_file() or source.suffix.lower() not in _AUDIO_SUFFIXES:
+        raise HTTPException(400,'请选择有效音频文件。')
+    item={'id':str(uuid.uuid4()),'path':str(source.resolve()),'name':name or source.name}
+    with _REGISTRY_LOCK:
+        saved=_read_registry(data);saved[item['id']]=item;_write_registry(data,saved)
+    return item
 
 class _OpenFileName(ctypes.Structure):
     _fields_=[
@@ -56,13 +82,9 @@ def _tk_pick():
         return False,''
 
 def install_reference_routes(app, data):
-    registry=Path(data)/'reference-paths.json'
-    lock=threading.Lock()
     picker_lock=threading.Lock()
-    def records():
-        return json.loads(registry.read_text(encoding='utf-8')) if registry.exists() else {}
     def resolve(key):
-        with lock: item=records().get(key)
+        item=read_registry(data).get(key)
         if not item or not Path(item['path']).is_file():
             raise HTTPException(404, '参考音频不存在或已移动，请重新选择。')
         return item
@@ -79,12 +101,7 @@ def install_reference_routes(app, data):
         source=Path(path)
         if not source.is_file() or source.suffix.lower() not in _AUDIO_SUFFIXES:
             raise HTTPException(400,'请选择有效音频文件。')
-        item={'id':str(uuid.uuid4()),'path':str(source.resolve()),'name':source.name}
-        with lock:
-            saved=records();saved[item['id']]=item
-            registry.parent.mkdir(parents=True,exist_ok=True)
-            temp=registry.with_suffix('.tmp');temp.write_text(json.dumps(saved,ensure_ascii=False),encoding='utf-8');temp.replace(registry)
-        return item
+        return register_reference_path(data,source)
     @app.post('/api/v1/references/{key}/transcribe')
     def transcribe(key:str,body:dict|None=None):
         payload=body or {}

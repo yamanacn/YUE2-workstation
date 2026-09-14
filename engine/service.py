@@ -365,6 +365,17 @@ def create_app(data=ROOT/'data',schedule=True,test_mode=False):
         t=store.track(id); path=store.run_dir(t['runId'])/'artifacts/audio.flac'
         if not path.is_file() or not path.resolve().is_relative_to(store.data/'runs'): failure('音频文件不存在','audio_missing',404)
         return FileResponse(path,media_type='audio/flac',headers={'Content-Disposition':'inline','Accept-Ranges':'bytes'})
+    @app.post('/api/v1/references/from-track')
+    def reference_from_track(body:dict):
+        """Register a finished track's audio as a reference so it can drive a new take."""
+        track=store.track(str(body.get('trackId') or ''))
+        run_id=track.get('runId')
+        path=store.run_dir(run_id)/'artifacts/audio.flac' if run_id else None
+        if path is None or not path.is_file() or not path.resolve().is_relative_to(store.data/'runs'):
+            failure('这条作品的音频不在本机，无法作为参考音频','track_audio_missing',404)
+        from .reference_files import register_reference_path
+        title=str(track.get('title') or '作品').strip().replace('/','-').replace('\\','-') or '作品'
+        return register_reference_path(store.data,path,title+'.flac')
     @app.get('/api/v1/runs/{id}/artifacts')
     def artifacts(id:str):
         store.get_run(id); directory=store.run_dir(id); path=directory/'artifacts/result.json'
