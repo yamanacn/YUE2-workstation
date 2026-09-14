@@ -26,7 +26,6 @@
 :root[data-theme=dark] .composer .vocal-mode-field .option-group>button[aria-pressed=true]{background:linear-gradient(135deg,#e4e6e9,#aeb3bc);color:#111214;box-shadow:inset 0 1px #ffffff70,0 4px 18px #c6cbd51a}
 :root[data-theme=dark] .arrangement-options button{border-radius:6px;color:#8a8f98}
 :root[data-theme=dark] .arrangement-options button[aria-pressed=true]{background:#23252a;color:#fff}
-:root[data-theme=dark] .creative-settings .creative-range{background:linear-gradient(to right,#e4f222 var(--range-fill),#383b3f var(--range-fill))}
 :root[data-theme=dark] .creative-settings .creative-range{background:linear-gradient(to right,#dfe2e6 var(--range-fill),#383b3f var(--range-fill))}
 :root[data-theme=dark] .creative-settings .creative-range::-webkit-slider-thumb{background:#dfe2e6;border-color:#0f1011}
 :root[data-theme=dark] .composer-footer{background:var(--ui-canvas)}

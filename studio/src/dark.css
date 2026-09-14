@@ -11,8 +11,8 @@
 .track-inline-actions .icon-button svg{width:16px;height:16px}
 .track-inline-actions .missing-action{font-size:12px;color:var(--warning);padding:7px}
 
-:root[data-theme=dark]{color-scheme:dark;--ink:#eeeeef;--secondary:#b4b4bc;--muted:#92929c;--line:#28282c;--taupe:#29292d;--taupe-ink:#dedee3;--error:#ec9d99;--warning:#dcc193;--black-bg:#101012;--black-card:#19191b;--black-hover:#222225;--pink:#f0449b;background:var(--black-bg);color:var(--ink)}
-[data-theme=dark] body{background:var(--black-bg)}
+:root[data-theme=dark]{color-scheme:dark;--ink:#eeeeef;--secondary:#b4b4bc;--muted:#92929c;--line:#28282c;--error:#ec9d99;--warning:#dcc193;background:#101012;color:var(--ink)}
+[data-theme=dark] body{background:#101012}
 [data-theme=dark] .studio-app{background:#101012;background-image:none;grid-template-rows:64px minmax(0,1fr) 76px;isolation:isolate;color:var(--ink)}
 [data-theme=dark] .glass{background:transparent;border:0;box-shadow:none;backdrop-filter:none}
 [data-theme=dark] .app-header{padding:0 22px;background:#101012;border-bottom:1px solid #28282c;backdrop-filter:none;gap:16px}
@@ -369,9 +369,6 @@
   [data-theme=dark] .sheet-footer{padding:14px 18px}
   [data-theme=dark] .settings-tabs>button{font-size:11px;padding:6px 8px}
   [data-theme=dark] .toast,[data-theme=dark] .playback-error{bottom:117px}
-}
-
-@media(max-width:599px){
   [data-theme=dark] .theme-toggle{width:44px;height:44px}
   [data-theme=dark] .header-button.button{min-width:44px;min-height:44px}
   [data-theme=dark] .quantity-options button{min-width:44px;height:40px}

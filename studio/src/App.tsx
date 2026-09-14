@@ -11,7 +11,6 @@ import {StyleChat,type ChatProvider} from './style-chat';
 import {useCallback,useEffect,useMemo,useRef,useState,type ChangeEvent,type WheelEvent} from 'react';
 import {AnimatePresence,MotionConfig,motion} from 'motion/react';
 import * as Menu from '@radix-ui/react-dropdown-menu';
-import '@fontsource-variable/noto-serif-sc';
 import {ThemeContext,readTheme,THEME_KEY,type Theme} from './theme';
 import {Button,Collapsible,ExpandedTrack,IconButton,PlaybackError,Player,Sheet,Toast,TrackMenu,type Notice} from './components';
 import {originalExtension,sourceLabel,runProgress,activeStates,cloneDraft,configChanges,createBatch,defaultConfig,draftForCreationMode,formatDate,formatTime,initialDraft,makeSamples,recoverState,safeFilename,stageLabels,terminalStates,trackFromRun,transitionRun,uid,validateDraft,type Config,type CreationMode,type Draft,type Run,type SavedState,type Stage,type Track} from './domain';

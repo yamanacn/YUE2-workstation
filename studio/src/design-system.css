@@ -4,7 +4,7 @@
   --ui-canvas:#fff;--ui-panel:#fafafa;--ui-card:#f5f5f5;--ui-control:#ededed;
   --ui-hover:#e8e8e8;--ui-edge:#e5e5e5;--ui-accent:#2563eb;--ui-tint:#eaf1ff;
   --ink:#171717;--text:#171717;--secondary:#525252;--muted:#737373;
-  --line:var(--ui-edge);--taupe:var(--ui-tint);--taupe-ink:var(--ui-accent);
+  --line:var(--ui-edge);
   --ui-primary:#171717;--ui-on-primary:#fff;
   font-family:Inter,"Segoe UI","Microsoft YaHei UI",sans-serif;
 }
