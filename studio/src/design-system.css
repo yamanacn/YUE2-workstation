@@ -27,9 +27,10 @@ html[data-theme] .header-button.button{background:transparent;border:1px solid v
 html[data-theme] .engine-status{background:transparent;box-shadow:none;font-size:12px;color:var(--muted)}
 html[data-theme] .count-badge{background:var(--ui-control);color:var(--secondary);border-radius:9999px}
 html[data-theme] .workspace-navigation{background:var(--ui-panel);padding:20px 10px;gap:8px}
-html[data-theme] .workspace-navigation button{border-radius:12px;min-height:64px;font-weight:500}
+html[data-theme] .workspace-navigation button{border-radius:12px;min-height:64px;font-weight:500;isolation:isolate}
 html[data-theme] .workspace-navigation button:hover{background:var(--ui-card);color:var(--ink)}
-html[data-theme] .workspace-navigation button[aria-current=page]{background:var(--ui-tint);color:var(--ui-accent)}
+html[data-theme] .workspace-navigation button[aria-current=page]{background:transparent;color:var(--ui-accent)}
+html[data-theme] .workspace-navigation .nav-pill{position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--ui-tint)}
 html[data-theme] .workbench{padding:0;gap:0}
 html[data-theme] .composer{padding:20px 20px 12px;border:0;border-radius:0;background:var(--ui-panel)}
 html[data-theme] .composer::before,html[data-theme] .player::before{display:none}
@@ -141,4 +142,4 @@ html[data-theme] .composer .add-reference{background:var(--ui-card);border:0;bor
  html[data-theme] .track-artwork{width:60px;height:60px}
 }
 
-.creation-tabs{display:flex;gap:4px;padding:4px;margin:0 0 14px;background:var(--ui-card);border-radius:10px}.creation-tabs button{flex:1;padding:9px 12px;border-radius:7px;color:var(--muted);font-size:12px}.creation-tabs button[aria-selected=true]{background:var(--ui-control);color:var(--ink);font-weight:600}.abc-field{margin-top:16px}.abc-field .field-heading{display:flex;align-items:center;justify-content:space-between}.abc-field .field-heading button{font-size:11px;color:var(--secondary)}.abc-field textarea{width:100%;min-height:190px;margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--ui-control);color:var(--ink);font-family:ui-monospace,Consolas,monospace;font-size:12px;line-height:1.6;resize:vertical}
+.creation-tabs{display:flex;gap:4px;padding:4px;margin:0 0 14px;background:var(--ui-card);border-radius:10px}.creation-tabs button{flex:1;padding:9px 12px;border-radius:7px;color:var(--muted);font-size:12px;position:relative;isolation:isolate}.creation-tabs button[aria-selected=true]{background:transparent;color:var(--ink);font-weight:600}.creation-tabs .tab-pill{position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--ui-control)}.abc-field{margin-top:16px}.abc-field .field-heading{display:flex;align-items:center;justify-content:space-between}.abc-field .field-heading button{font-size:11px;color:var(--secondary)}.abc-field textarea{width:100%;min-height:190px;margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--ui-control);color:var(--ink);font-family:ui-monospace,Consolas,monospace;font-size:12px;line-height:1.6;resize:vertical}

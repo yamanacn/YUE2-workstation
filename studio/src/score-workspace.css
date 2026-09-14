@@ -6,8 +6,11 @@
 .workspace-navigation button>span{position:absolute;right:8px;top:6px;font-size:9px}
 .workspace-pages{position:relative;min-width:0;min-height:0}
 .workspace-pages>.workbench,.workspace-pages>.score-module{position:absolute;inset:0;height:100%;width:100%;min-height:0;min-width:0}
-.workspace-pages>[data-active=false]{visibility:hidden;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity 140ms cubic-bezier(.4,0,1,1),transform 140ms cubic-bezier(.4,0,1,1),visibility 0s 140ms}
-.workspace-pages>[data-active=true]{visibility:visible;opacity:1;transform:translateY(0);transition:opacity 220ms cubic-bezier(.22,1,.36,1),transform 220ms cubic-bezier(.22,1,.36,1),visibility 0s}
+.workspace-pages>[data-active=false]{visibility:hidden;pointer-events:none;opacity:0;transition:opacity 150ms cubic-bezier(.4,0,1,1),transform 150ms cubic-bezier(.4,0,1,1),visibility 0s 150ms}
+.workspace-pages>[data-active=true]{visibility:visible;opacity:1;transform:translateY(0);transition:opacity 260ms cubic-bezier(.25,1,.5,1),transform 260ms cubic-bezier(.25,1,.5,1),visibility 0s}
+/* The rail is a vertical stack: each page waits on its own side and slides back into place. */
+.workspace-pages>.workbench[data-active=false]{transform:translateY(-12px)}
+.workspace-pages>.score-module[data-active=false]{transform:translateY(12px)}
 @keyframes workspace-enter{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .score-workspace{--score-card:rgba(255,255,255,.5);--score-control:#e7e5e2;--score-text:#303033;--score-muted:#85838a;--score-line:#26262a14;--score-selected:#353438;--score-selected-text:#faf9f7;display:flex;flex-direction:column;gap:16px;height:100%;padding:24px 30px 20px;min-height:0;color:var(--score-text);overflow:hidden}
 [data-theme=dark] .score-workspace{--score-card:#19191b;--score-control:#242427;--score-text:#eae9ed;--score-muted:#8b8b95;--score-line:#ffffff0b;--score-selected:#eeece8;--score-selected-text:#202023}
