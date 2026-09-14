@@ -6,7 +6,8 @@ export const performancePresets:Record<'performance'|'balanced'|'extreme',Perfor
   balanced:{fp8CudaGraph:false,quantization:'none',offloadAr:true,vaeCoreFrames:512,memoryBudgetGiB:0,dynamicTokens:true,targetSeconds:0,attention:'auto',queryChunkSize:128},
   extreme:{fp8CudaGraph:false,quantization:'fp8',offloadAr:true,vaeCoreFrames:512,memoryBudgetGiB:0,dynamicTokens:true,targetSeconds:0,attention:'auto',queryChunkSize:64},
 };
-export type Config = { cot: 'full'|'melody'|'off'; temperature:number; topP:number; topK:number; repetitionPenalty:number; maxTokens:number; odeSteps:number; cfg:'auto'|number; performance?:PerformanceConfig };
+export type AdapterConfig = { artistId:string|null; artistScale:number; narId:string|null; narEnabled:boolean };
+export type Config = { cot: 'full'|'melody'|'off'; temperature:number; topP:number; topK:number; repetitionPenalty:number; maxTokens:number; odeSteps:number; cfg:'auto'|number; performance?:PerformanceConfig; adapters?:AdapterConfig };
 export type ReferenceStrength='free'|'balanced'|'faithful';
 export type ReferenceSource={id:string;path:string;name:string;range:[number,number]|null;preserve:'melody'|'full';strength?:ReferenceStrength;sha256?:string};
 export type VocalMode='auto'|'male'|'female'|'instrumental';
@@ -18,9 +19,10 @@ export type Track = {id:string; title:string; version:string; style:string; lyri
 export function originalExtension(track:Track){return track.audioFormat??(track.audioKind==='local'?(track.sourceTitle?.split('.').pop()||'mp3'):track.audioKind==='generated'?'flac':'mp3')}
 export function sourceLabel(track:Track){return track.audioKind==='generated'?'本机生成':track.audioKind==='official-demo'?'官方示例':'本地关联'}
 export function runProgress(run:Run){const p=run.progress;if(!p)return '';const count=p.completed!=null?`${p.completed}${p.total!=null?` / ${p.total}`:''} ${p.unit??''}`:'';return [p.detail,count,run.elapsed?`已用时 ${formatTime(run.elapsed)}`:''].filter(Boolean).join(' · ')}
-export const defaultConfig:Config={cot:'full',temperature:1,topP:.95,topK:100,repetitionPenalty:1.2,maxTokens:9000,odeSteps:32,cfg:1,performance:{...performancePresets.balanced}};
+export const defaultAdapters:AdapterConfig={artistId:null,artistScale:1,narId:null,narEnabled:false};
+export const defaultConfig:Config={cot:'full',temperature:1,topP:.95,topK:100,repetitionPenalty:1.2,maxTokens:9000,odeSteps:32,cfg:1,performance:{...performancePresets.balanced},adapters:{...defaultAdapters}};
 export const sampleLyrics='[Verse]\n末班车经过了街角\n你把晚风留在我的外套\n路灯下那些没说完的话\n陪着影子慢慢走回家\n\n[Chorus]\n在雨停之前 再等一遍\n让这座城市安静一点';
-export const initialDraft:Draft={title:'雨停之前',lyrics:sampleLyrics,style:'独立流行 · 温暖男声 · 木吉他 · 松弛鼓点',vocalMode:'auto',count:1,seedMode:'random',seed:'831001',config:{...defaultConfig}};
+export const initialDraft:Draft={title:'雨停之前',lyrics:sampleLyrics,style:'独立流行 · 温暖男声 · 木吉他 · 松弛鼓点',vocalMode:'auto',count:1,seedMode:'random',seed:'831001',config:{...defaultConfig,adapters:{...defaultAdapters}}};
 export const sampleAudio='/audio/tonight-awake.mp3';
 export const stageLabels:Record<Stage,string>={queued:'等待开始',checking:'检查生成条件',planning:'构思旋律与和弦',generating_tokens:'生成音乐序列',synthesizing:'合成音频',decoding:'解码音频',finalizing:'保存作品',cancelling:'正在取消',cancelled:'已取消',succeeded:'已完成',failed:'生成失败',interrupted:'已中断'};
 export const terminalStates:Stage[]=['cancelled','succeeded','failed','interrupted'];
