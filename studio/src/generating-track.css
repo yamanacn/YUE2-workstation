@@ -1,6 +1,8 @@
 /* Quiet liquid light, anchored to the same anatomy as a finished work. */
-.generating-track{--flow-core:174,157,186;--flow-pearl:213,204,218;position:relative;border-bottom:1px solid var(--line);animation:generating-arrive .26s cubic-bezier(.22,1,.36,1) both}
-.generating-track .track-summary{min-height:152px}
+.generating-track{--flow-core:174,157,186;--flow-pearl:213,204,218;--generating-dim:.68;position:relative;border-bottom:1px solid var(--line);animation:generating-arrive .26s cubic-bezier(.22,1,.36,1) both}
+.generating-track .track-summary{min-height:152px;opacity:var(--generating-dim)}
+.generating-track .track-summary:is(:hover,:focus-within){opacity:.92}
+.track.generating-track.selected .track-summary{opacity:1}
 .generating-track .track-copy{min-width:0}
 .generating-cover{isolation:isolate;overflow:hidden}
 .generating-cover img{filter:saturate(.55) brightness(.83);transition:filter .8s}
@@ -26,7 +28,8 @@
 .is-cancelling .flow-body,.is-cancelling .cover-light{opacity:.3}
 .is-cancelling *{animation-play-state:paused!important}
 .generating-track[data-offscreen=true] .cover-light,.generating-track[data-offscreen=true] .flow-current,.generating-track[data-offscreen=true] .flow-mist{animation-play-state:paused}
-[data-theme=dark] .generating-track{border:0;border-radius:0;--flow-core:157,139,177;--flow-pearl:207,194,218}
+[data-theme=dark] .generating-track{border:0;border-radius:0;--generating-dim:.62;--flow-core:157,139,177;--flow-pearl:207,194,218}
+.solid-surfaces .generating-track{--generating-dim:.86}
 [data-theme=dark] .generating-track .track-summary{min-height:152px;background:transparent}
 [data-theme=dark] .generating-track .generation-status{color:#929098}
 [data-theme=dark] .generation-status>button:hover{color:#d3cbd9}

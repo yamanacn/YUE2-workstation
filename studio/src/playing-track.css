@@ -1,6 +1,6 @@
 /* Playback feedback follows the audio state, independently of detail selection. */
 .track.selected .track-summary::before{display:none!important}
-.track .track-summary{position:relative;isolation:isolate;transition:background-color 220ms cubic-bezier(.22,1,.36,1)}
+.track .track-summary{position:relative;isolation:isolate;transition:background-color 220ms cubic-bezier(.22,1,.36,1),opacity 300ms cubic-bezier(.22,1,.36,1)}
 .track.is-playing .track-summary{background:#ffffffa6}
 [data-theme=dark] .track.is-playing .track-summary{background:#202024}
 [data-theme=dark] .track.is-playing .track-summary:hover{background:#242429}

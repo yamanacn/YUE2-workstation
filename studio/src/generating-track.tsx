@@ -5,7 +5,7 @@ import {IconButton} from './components';
 import {MoreIcon,QueueIcon,XIcon} from './icons';
 import {formatTime,type Run,stageLabels} from './domain';
 import './generating-track.css';
-export function GeneratingTrack({run,onDetails,onQueue,onCancel}:{run:Run;onDetails:()=>void;onQueue:()=>void;onCancel:()=>void}){
+export function GeneratingTrack({run,selected,onDetails,onQueue,onCancel}:{run:Run;selected:boolean;onDetails:()=>void;onQueue:()=>void;onCancel:()=>void}){
  const [clock,setClock]=useState(Date.now());
  const root=useRef<HTMLElement|null>(null);
  useEffect(()=>{const timer=setInterval(()=>setClock(Date.now()),1000);return()=>clearInterval(timer)},[]);
@@ -16,11 +16,11 @@ export function GeneratingTrack({run,onDetails,onQueue,onCancel}:{run:Run;onDeta
  const cancelling=run.state==='cancelling';
  const elapsed=Math.max(run.elapsed,Math.floor((clock-run.created)/1000));
  const label=stageLabels[run.state];
- return <motion.article ref={root} layout="position" initial={{opacity:0,height:0}} animate={{opacity:1,height:"auto"}} exit={{opacity:0,height:0}} style={{overflow:"clip"}} className={`track generating-track ${cancelling?'is-cancelling':''}`} aria-label={`正在生成 ${run.snapshot.draft.title||'未命名作品'}`}>
-  <div className="track-summary">
+ return <motion.article ref={root} layout="position" initial={{opacity:0,height:0}} animate={{opacity:1,height:"auto"}} exit={{opacity:0,height:0}} style={{overflow:"clip"}} className={`track generating-track ${selected?'selected':''} ${cancelling?'is-cancelling':''}`} aria-label={`正在生成 ${run.snapshot.draft.title||'未命名作品'}`}>
+  <div className="track-summary" onClick={event=>{if((event.target as HTMLElement).closest('button,input,a'))return;onDetails()}}>
    <button className="track-artwork generating-cover" aria-label="查看生成详情" onClick={onDetails}><img src="/assets/opal-glass.webp" alt="生成中的作品封面"/><span className="cover-light" aria-hidden="true"/></button>
    <div className="track-copy">
-    <div className="title-version"><button onClick={onDetails}>{run.snapshot.draft.title||'未命名作品'}</button><span className="version">V01 · {run.snapshot.runtime==='local-yue2'?'本机生成':'演示生成'}</span></div>
+    <div className="title-version"><button onClick={onDetails} aria-expanded={selected} aria-haspopup="dialog">{run.snapshot.draft.title||'未命名作品'}</button><span className="version">V01 · {run.snapshot.runtime==='local-yue2'?'本机生成':'演示生成'}</span></div>
     <p>{run.snapshot.draft.style}</p>
     <div className="generation-flow" data-known={known} role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={fraction===null?undefined:Math.round(fraction*100)} aria-valuetext={fraction===null?label:`${label}，当前阶段 ${Math.round(fraction*100)}%`}>
       <div className="flow-rail"/><div className="flow-body" style={{transform:`scaleX(${fraction===null?1:fraction})`}}><span className="flow-mist"/><span className="flow-silk"/><span className="flow-current"/><span className="flow-front"/></div>

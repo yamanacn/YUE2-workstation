@@ -229,3 +229,11 @@
   margin-top:0;
   margin-bottom:0;
 }
+/* A selected work row needs a visible marker in dark mode; hover alone is not enough. */
+:root[data-theme=dark] .track.selected .track-summary{background:#1b1d20}
+:root[data-theme=dark] .track.selected .track-summary:hover{background:#202226}
+:root[data-theme=dark] .track.selected .track-summary:before{display:block!important;left:0;top:16px;bottom:16px;width:2px;height:auto;margin-top:0;border-radius:2px;background:#c3cad6}
+/* The same marker in the light theme: a selected row must stay legible while the panel is open. */
+:root[data-theme=light] .track.selected .track-summary{background:var(--ui-card)}
+:root[data-theme=light] .track.selected .track-summary:hover{background:var(--ui-control)}
+:root[data-theme=light] .track.selected .track-summary:before{display:block!important;left:0;top:16px;bottom:16px;width:2px;height:auto;margin-top:0;border-radius:2px;background:#a3a3a3}

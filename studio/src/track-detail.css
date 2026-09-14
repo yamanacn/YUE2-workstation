@@ -1,0 +1,54 @@
+/* Work detail panel: a third column that pushes the list instead of covering it. */
+.track-detail{position:relative;isolation:isolate;display:flex;flex-direction:column;width:0;overflow:hidden;background:var(--ui-panel);transition:width 280ms cubic-bezier(.22,1,.36,1)}
+.track-detail[data-open=true]{width:clamp(320px,26vw,420px)}
+.track-detail-glow{position:absolute;left:0;right:0;top:0;height:min(52%,420px);z-index:0;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 52%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 52%,transparent 100%)}
+.track-detail-head,.track-detail-body,.track-detail-footer{position:relative;z-index:1}
+:root[data-theme=light] .track-detail-glow{opacity:.62}
+.track-detail-head{display:flex;align-items:flex-start;gap:12px;padding:18px 18px 12px;min-width:320px}
+.track-detail-head h2{margin:0;font-size:17px;font-weight:600;line-height:1.45;color:var(--ink);overflow-wrap:anywhere}
+.track-detail-head .version{display:block;margin-top:3px}
+.track-detail-head>div{min-width:0;flex:1}
+.track-detail-head .icon-button{flex:none}
+.track-detail-body{flex:1;min-height:0;overflow-y:auto;padding:0 18px 18px;display:flex;flex-direction:column;gap:16px;min-width:320px}
+.track-detail-hero{display:flex;align-items:center;gap:14px}
+.track-detail-hero img{width:84px;height:84px;flex:none;border-radius:12px;object-fit:cover;background:var(--ui-card)}
+.track-detail-hero-meta{min-width:0;display:grid;gap:8px;justify-items:start}
+.track-detail-meta{font-size:11px;color:var(--muted)}
+.track-detail-section{display:grid;gap:10px}
+.detail-stage{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--ink)}
+.detail-stage:before{content:"";width:7px;height:7px;border-radius:50%;background:#b6a4d4;animation:detail-stage-pulse 1.9s ease-in-out infinite}
+.detail-stage.is-settled:before{animation:none;background:var(--muted)}
+.detail-progress{position:relative;flex:none;height:6px;border-radius:999px;background:var(--ui-card);overflow:hidden}
+.detail-progress>span{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#a99ac4,#d8b9d8);transition:width .3s cubic-bezier(.22,1,.36,1)}
+.detail-progress[data-unknown=true]>span{width:34%;animation:detail-progress-sweep 1.8s ease-in-out infinite}
+@keyframes detail-stage-pulse{50%{opacity:.3}}
+@keyframes detail-progress-sweep{0%{transform:translateX(-110%)}100%{transform:translateX(300%)}}
+.track-detail-section-head{display:flex;align-items:center;gap:8px}
+.track-detail-section-head h3{margin:0;font-size:13px;font-weight:600;color:var(--secondary)}
+.track-detail-section-head .icon-button{margin-left:auto}
+.track-detail-style,.track-detail-lyrics{margin:0;padding:12px 14px;border-radius:12px;background:var(--ui-card);overflow-wrap:anywhere}
+.track-detail-style{font-size:13px;line-height:1.75;color:var(--ink)}
+/* Folded by default so a long style description never pushes the lyrics off screen. */
+.track-detail-style-text{display:block;height:calc(1.75em * 3);overflow:clip;transition:height 240ms cubic-bezier(.22,1,.36,1)}
+.track-detail-style-text[data-expanded=true]{height:auto}
+.track-detail-style-text[data-overflow=true][data-expanded=false]{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 22px),transparent)}
+.detail-expand{margin-right:2px}
+.track-detail-lyrics{font-size:13px;line-height:1.9;color:var(--secondary);white-space:pre-wrap;max-height:320px;overflow-y:auto}
+.track-detail-footer{flex:none;display:grid;gap:10px;padding:14px 18px;border-top:1px solid var(--line);min-width:320px}
+.track-detail-footer>.button{width:100%;justify-content:center}
+:root[data-theme] .track-detail .button.primary:not(.generate-button):not(.main-play){background:var(--ui-primary);border-color:var(--ui-primary);color:var(--ui-on-primary);box-shadow:none;font-weight:600}
+:root[data-theme] .track-detail .button.primary:not(.generate-button):not(.main-play):hover:not(:disabled){background:var(--ui-primary);border-color:var(--ui-primary);filter:brightness(.94)}
+:root[data-theme] .track-detail .button.primary:disabled{background:var(--ui-control);border-color:transparent;color:var(--muted)}
+.track-detail-footer-row{display:flex;gap:8px}
+.track-detail-footer-row .button{flex:1;min-width:0}
+@media(prefers-reduced-motion:reduce){.track-detail{transition:none}}
+@media(min-width:1180px){
+  .track-detail{grid-row:1;grid-column:4;height:100%}
+}
+@media(max-width:1179px){
+  .track-detail{position:fixed;top:0;right:0;bottom:0;z-index:60;box-shadow:-16px 0 44px rgba(23,23,23,.14)}
+  :root[data-theme=dark] .track-detail{box-shadow:-16px 0 44px #000000a6}
+  .track-detail[data-open=true]{width:100vw}
+}
