@@ -34,6 +34,8 @@ def validate_draft(d):
         c=d['config']
         from .performance import settings
         settings(c)
+        from .adapters import normalize_request
+        normalize_request(c.get('adapters'))
         for key in ('temperature','topP','topK','repetitionPenalty','maxTokens','odeSteps'):
             if type(c[key]) not in (float,int) or not math.isfinite(c[key]): raise ValueError('数值无效: '+key)
         if c['cfg']!='auto' and (type(c['cfg']) not in (float,int) or not math.isfinite(c['cfg'])): raise ValueError('cfg 无效')
@@ -118,6 +120,10 @@ class Store:
             else: seeds=[str(secrets.randbelow(2**63)) if d['seedMode']=='random' else str(int(d['seed'])+(i if d['seedMode']=='increment' else 0)) for i in range(d['count'])]
             try: identities=expected_weights()
             except (OSError,ValueError,KeyError): failure('模型身份文件尚未就绪','models_unavailable',503)
+            from .adapters import AdapterError, adapter_identity, normalize_request
+            try: adapters=normalize_request(d.get('config',{}).get('adapters'))
+            except AdapterError as exc: failure(str(exc),getattr(exc,'code','adapter_invalid'),422)
+            if adapters: identities={**identities,'adapters':adapter_identity(adapters)}
             batch_id=str(uuid.uuid4()); self.db.execute('INSERT INTO batches VALUES(?,?,?)',(request_id,body_hash,batch_id))
             from .performance import settings
             runtime_settings=settings(d['config'])
@@ -321,6 +327,7 @@ def create_app(data=ROOT/'data',schedule=True,test_mode=False):
         response=await call_next(request)
         if request.url.path.startswith('/api/'): response.headers['Cache-Control']='no-store'
         response.headers['X-Content-Type-Options']='nosniff'; return response
+    from .adapters import public_catalog
     from .reference_files import install_reference_routes
     install_reference_routes(app, data)
     from .score_jobs import install_score_routes
@@ -331,6 +338,8 @@ def create_app(data=ROOT/'data',schedule=True,test_mode=False):
     def health(): return ctl.health()
     @app.get('/api/v1/state')
     def state(): return store.state()
+    @app.get('/api/v1/adapters')
+    def adapters(): return public_catalog()
     @app.post('/api/v1/shutdown')
     def shutdown():
         with store.lock:
@@ -400,7 +409,7 @@ def import_artifacts(source,title,data):
     source=Path(source).resolve(); meta=validate_artifacts(source)
     request=read_json(source/'request.json'); config=read_json(source/'config.json'); gen=config['generation']; sampling=gen['semantic']
     draft={'title':title,'style':request['style'],'lyrics':request['lyrics'],'count':1,'seedMode':'fixed','seed':str(request['seed']),
-       'config':{'cot':request['cot'],'cfg':'auto' if request['cfg_scale'] is None else request['cfg_scale'],'temperature':sampling['temperature'],'topP':sampling['top_p'],'topK':sampling['top_k'],'repetitionPenalty':sampling['repetition_penalty'],'maxTokens':sampling['max_tokens'],'odeSteps':gen['ode_steps']}}
+       'config':{'adapters':config.get('adapters'),'cot':request['cot'],'cfg':'auto' if request['cfg_scale'] is None else request['cfg_scale'],'temperature':sampling['temperature'],'topP':sampling['top_p'],'topK':sampling['top_k'],'repetitionPenalty':sampling['repetition_penalty'],'maxTokens':sampling['max_tokens'],'odeSteps':gen['ode_steps']}}
     store=Store(data); store.pause(True)
     batch=store.batch({'requestId':'import-'+meta['identity'],'draft':draft}); run=batch['runs'][0]
     if run['state']=='succeeded': return batch

@@ -83,6 +83,11 @@ def execute(run_dir,data_dir):
             read_attention=install_nar_policy(runtime['attention'],runtime['queryChunkSize'])
             from yue2.protocol import GenerationConfig
             class ObservedPipeline(YuE2Pipeline):
+                def effective_config(self,request,abc_sampling=None,semantic_sampling=None):
+                    config=super().effective_config(request,abc_sampling,semantic_sampling)
+                    adapters=getattr(self,'_adapter_config',None)
+                    if adapters: config['adapters']=adapters
+                    return config
                 @contextmanager
                 def _status(self,label,*,total=None,unit=None):
                     nonlocal phase,loaded
@@ -113,14 +118,24 @@ def execute(run_dir,data_dir):
                 return ObservedPipeline.from_pretrained(model=str(ROOT/'models/YuE2-3B'),vae=str(ROOT/'models/YuE2-Vae'),local_files_only=True,
                     device='cuda',backend=backend,memory_budget_gib=memory_budget,quantization=quantization,offload_ar=runtime['offloadAr'],vae_core_frames=runtime['vaeCoreFrames'],
                     generation_config=GenerationConfig(ode_steps=c['odeSteps']),progress=True)
-            ar_backend='torch' if (flash_available or external_flash_installed()) and runtime['attention']=='auto' and (quantization=='none' or runtime['fp8CudaGraph']) else 'torch-eager'
+            def apply_adapters(target_pipe):
+                base_weights={k:v for k,v in (snapshot.get('modelIdentities') or {}).items() if k in ('mot','vae')}
+                if target_pipe.weights!=base_weights: raise ValueError('Model identities changed since this request was accepted')
+                from .adapters import normalize_request, adapter_identity, prepare_pipeline_adapters
+                request=normalize_request(d.get('config',{}).get('adapters'))
+                audit=prepare_pipeline_adapters(target_pipe,request,(snapshot.get('modelIdentities') or {}).get('adapters'),quantization,progress)
+                if audit:
+                    target_pipe.weights={**target_pipe.weights,'adapters':adapter_identity(request)}
+                    write_json(run_dir/'adapter-audit.json',audit)
+                write_json(run_dir/'weights-identity.json',target_pipe.weights)
+                return audit
+            ar_backend='torch'
             runtime_audit['arBackend']=ar_backend
             runtime_audit['nativeFlashAvailable']=flash_available
             runtime_audit['externalFlashAvailable']=external_flash_installed()
             write_json(run_dir/'runtime-settings.json',runtime_audit)
             pipe=build_pipe(ar_backend)
-            if pipe.weights!=snapshot.get('modelIdentities'): raise ValueError('Model identities changed since this request was accepted')
-            write_json(run_dir/'weights-identity.json',pipe.weights)
+            apply_adapters(pipe)
             check()
             from .prompting import resolve_prompt
             style,lyrics=resolve_prompt(d)
@@ -140,7 +155,7 @@ def execute(run_dir,data_dir):
                 write_json(run_dir/'runtime-settings.json',runtime_audit)
                 progress('FlashAttention 不可用，回退到 SDPA')
                 pipe=build_pipe('torch-eager')
-                if pipe.weights!=snapshot.get('modelIdentities'): raise ValueError('Model identities changed since this request was accepted')
+                apply_adapters(pipe)
                 song=generate_with_instrumental(pipe,request_kwargs,d.get('vocalMode'),run_dir,check,progress)
             attention=read_attention()
             attention['arBackend']=ar_backend
