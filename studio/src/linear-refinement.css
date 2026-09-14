@@ -185,7 +185,7 @@
   box-shadow:none;
 }
 :root[data-theme] .composer :is(.lyrics-field,.style-field,.vocal-mode-field,.arrangement-field,.creative-card){
-  border:1px solid var(--ui-edge);
+  border:0;
 }
 :root[data-theme] :is(.button,.header-button.button,.score-submit.button,.main-play.icon-button,.settings-tabs>button,.dropdown,.select-menu,.search-field,.setting-field input,.setting-field select,.option-group>button,.precision-options button,.performance-presets button,.demo-options>button,.score-mode,.score-view-tabs,.score-history-list>button,.style-chat-config,.chat-input,.chat-message.user,.reference-play,.reference-wave,.toast,.playback-error){
   border-radius:var(--component-control-radius);
@@ -209,7 +209,10 @@
 :root[data-theme] .sheet-header,:root[data-theme] .sheet-body{padding-left:24px;padding-right:24px}
 :root[data-theme] .score-result-toolbar,:root[data-theme] .score-code-tools{padding-left:16px;padding-right:16px}
 :root[data-theme] .score-history-list>button{padding:12px}
-:root[data-theme] .reference-card{border:1px solid var(--ui-edge)}
+:root[data-theme] .reference-card{border:0}
+:root[data-theme] .composer .reference-card{background:var(--ui-card);color:var(--ink)}
+:root[data-theme=dark] .composer .reference-card{background:linear-gradient(145deg,#121315,#0e0f10)}
+:root[data-theme] .composer .reference-card .add-reference{background:transparent}
 :root[data-theme] .reference-wave{border-radius:var(--component-control-radius)}
 :root[data-theme] .style-chat-suggestions button{border-radius:9999px}
 :root[data-theme] .chat-message.assistant{border-radius:var(--component-control-radius)}
@@ -219,4 +222,10 @@
 @media(max-width:599px){
   :root[data-theme] .composer :is(.style-field,.lyrics-field,.abc-field){padding:12px 14px 50px}
   :root[data-theme] .composer .field-collapsed{padding:12px 14px}
+}
+/* Composer card stack keeps one rhythm: uniform 16px between stacked cards. */
+:root[data-theme] .composer .composer-scroll{gap:16px}
+:root[data-theme] .composer .composer-scroll>:is(.composer-topline,.title-field,.reference-card,.vocal-mode-field,.lyrics-field,.style-field,.arrangement-field,.abc-field,.composer-preferences,.field-error){
+  margin-top:0;
+  margin-bottom:0;
 }

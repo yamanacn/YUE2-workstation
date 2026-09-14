@@ -30,7 +30,6 @@ html[data-theme] .composer .field .textarea-shell textarea{display:block;box-siz
 .composer .field-collapsed .editor-resize-handle{display:none}
 .composer .field[data-resizing=true] .textarea-shell{transition:none}
 [data-theme=dark] .composer .title-field input,[data-theme=dark] .composer .title-field input:focus-visible{border:0;outline:0;box-shadow:none}
-html[data-theme=dark] .composer .reference-card{border:0}
 .composer .vocal-mode-field{flex:none;margin-top:18px;background:#19191b;border-radius:18px;padding:10px 18px}
 .composer .vocal-mode-field+.lyrics-field{margin-top:16px}
 .composer .vocal-mode-field .vocal-mode-row{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:52px}
