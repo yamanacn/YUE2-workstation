@@ -29,6 +29,7 @@ export function LoraCard({value,onChange,active=true}:{value:AdapterValue;onChan
     <div className="lora-row"><span className="lora-label">风格</span><SelectControl value={value.artistId??''} disabled={loading||!artists.length} onChange={event=>onChange({...value,artistId:event.target.value||null})}><option value="">不使用</option>{artists.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</SelectControl></div>
     {artist?<>
       <div className="lora-row"><span className="lora-label">强度</span><input className="lora-range" type="range" min={0} max={MAX_ADAPTER_SCALE} step={0.05} value={value.artistScale} aria-label={`${artist.name} 强度`} onChange={event=>onChange({...value,artistScale:Number(event.target.value)})}/><output className="lora-value">{value.artistScale.toFixed(2)}</output><button type="button" className="text-button" onClick={()=>onChange({...value,artistId:null})}>卸载</button></div>
+      {value.artistScale>1.2?<p className="lora-warn">强度超过 1.2 时乐谱规划可能失败（需要规划乐谱的模式会直接报错）；建议 1.2 以内，或把「编曲方式」改成「直接生成」。</p>:null}
       <p className="lora-hint">强度越高风格约束越强；改动对下一次生成生效。</p>
     </>:null}
     {narItems.length?<div className="lora-row"><span className="lora-label">复音细节</span><SelectControl value={value.narEnabled?(value.narId??''):''} disabled={loading} onChange={event=>onChange(event.target.value?{...value,narId:event.target.value,narEnabled:true}:{...value,narId:null,narEnabled:false})}><option value="">不使用</option>{narItems.map(item=><option key={item.id} value={item.id}>{item.name}</option>)}</SelectControl></div>:null}

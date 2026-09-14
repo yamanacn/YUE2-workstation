@@ -366,7 +366,8 @@ def generate(pipe, kwargs, vocal_mode, run_dir, check, progress):
         audit.update(normalization)
     except ValueError as error:
         write_json(run_dir / 'instrumental-transform.json', {'validation': 'failed', 'error': str(error)})
-        raise ValueError('纯音乐乐谱处理失败：' + str(error)) from error
+        raise ValueError('纯音乐乐谱处理失败：模型这次规划出的乐谱不完整或不规范（' + str(error) + '）。'
+                         '可以换一个种子、把 LoRA 强度调低，或把「编曲方式」改成「直接生成」跳过乐谱规划后重试。') from error
     (run_dir / 'instrumental-score.abc').write_text(abc, encoding='utf-8')
     write_json(run_dir / 'instrumental-transform.json', {
         **audit, 'cot': kwargs['cot'], 'originalPlanTiming': original.timing,
